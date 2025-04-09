@@ -27,6 +27,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Golos+Text:400,500,600,700,800,900&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ" type="text/css">
 
+  <!-- Custom Styles -->
   <style>
     .video-wrapper {
       display: flex;
@@ -77,20 +78,21 @@
 
 </head>
 <body>
-
-  <!-- Menu -->
+  <!-- Main Menu -->
   <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
       <div class="container">
         <div class="navbar-brand">
           <span class="navbar-logo">
             <a href="index.html#video05-4">
-              <img src="assets/images/logo.jpg-278x75.jpg" alt="Logo" style="height: 5rem;">
+              <img src="assets/images/logo.jpg-278x75.jpg" alt="Mobirise Website Builder" style="height: 5rem;">
             </a>
           </span>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <div class="hamburger"><span></span><span></span><span></span><span></span></div>
+          <div class="hamburger">
+            <span></span><span></span><span></span><span></span>
+          </div>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
@@ -114,10 +116,10 @@
       </div>
       <div class="video-wrapper">
         <div class="video-container">
-          <video id="bg-video" class="background-video" playsinline muted loop>
+          <video id="bg-video" class="background-video" autoplay loop playsinline controls>
             <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
           </video>
-          <video id="main-video" class="foreground-video" playsinline loop>
+          <video id="main-video" class="foreground-video" autoplay loop playsinline controls>
             <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
           </video>
         </div>
@@ -129,45 +131,60 @@
         const mainVideo = document.getElementById("main-video");
         const bgVideo = document.getElementById("bg-video");
 
-        // Preparar vídeo principal
-        mainVideo.muted = false;
-        mainVideo.volume = 1.0;
-        mainVideo.loop = true;
+        mainVideo.volume = 0.5;
 
-        // Tentar autoplay
-        const playMain = mainVideo.play();
-        if (playMain !== undefined) {
-          playMain.catch(error => {
-            console.warn("Autoplay com som pode estar bloqueado. O utilizador deve interagir com a página.");
-          });
-        }
-
-        // Background sem som, apenas visual
-        bgVideo.muted = true;
-        bgVideo.loop = true;
-        bgVideo.play();
-
-        // Sincronizar os dois vídeos
+        // Sync background video with main video
         mainVideo.addEventListener("play", () => bgVideo.play());
         mainVideo.addEventListener("pause", () => bgVideo.pause());
-        mainVideo.addEventListener("seeked", () => {
-          bgVideo.currentTime = mainVideo.currentTime;
-        });
+        mainVideo.addEventListener("seeked", () => { bgVideo.currentTime = mainVideo.currentTime; });
       });
     </script>
-  </section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mainVideo = document.getElementById("main-video");
+    const bgVideo = document.getElementById("bg-video");
+
+    // Define o volume para 50%
+    mainVideo.volume = 0.5;
+
+    // Tenta forçar autoplay com som após pequeno atraso (alguns browsers exigem interação)
+    const playPromise = mainVideo.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Vídeo começou a reproduzir com som
+        })
+        .catch((error) => {
+          // Em navegadores onde o autoplay com som falha, mostramos instrução ao utilizador
+          console.warn("Autoplay com som bloqueado. Clique para ativar o vídeo.");
+          mainVideo.muted = true;
+          mainVideo.play();
+        });
+    }
+
+    // Sincroniza vídeo de fundo com o principal
+    mainVideo.addEventListener("play", () => bgVideo.play());
+    mainVideo.addEventListener("pause", () => bgVideo.pause());
+    mainVideo.addEventListener("seeked", () => {
+      bgVideo.currentTime = mainVideo.currentTime;
+    });
+  });
+</script>
+
+    
+  </section>
   <div class="container-fluid">
     <div class="row">
       <div class="content-wrap col-12 col-md-12">
-        <!-- Conteúdo adicional aqui -->
+        
       </div>
     </div>
   </div>
+</section>
 
-</body>
-</html>
-
+<section data-bs-version="5.1" class="slider05 cid-uHT9nHcP5U" id="slider05-6">
+    
 
     <div class="container">
         <div class="row justify-content-center">
