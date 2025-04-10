@@ -99,21 +99,30 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  font-size: 6vw; /* Responsivo ao ecrã */
-  font-weight: bold;
-  text-shadow: 1px 1px #333;
-  animation: pulse 2s infinite alternate;
-  max-width: 90vw;
-  text-align: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
+
 .contagem div {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   padding: 10px;
-  border-radius: 15px;
-  min-width: 60px;
-  flex: 1 1 80px;
+  border-radius: 12px;
+  flex: 1 1 70px;
+  max-width: 90px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 1.2em;
+}
+.contagem div span {
+  display: block;
+  font-size: 2em;
+}
+
+.contagem div br + * {
+  font-size: 0.75em;
 }
 
     @keyframes pulse {
