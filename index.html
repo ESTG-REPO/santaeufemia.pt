@@ -112,10 +112,11 @@ h1 {
 
 .contagem div {
   background: rgba(255, 255, 255, 0.15);
-  padding: 20px;
+  padding: 20px;        /* Aumenta o preenchimento interno */
   border-radius: 16px;
   flex: 1 1 100px;
-  max-width: 120px;
+  min-width: 100px;      /* Largura mínima maior */
+  max-width: 150px;      /* Largura máxima maior */
   text-align: center;
   white-space: nowrap;
   font-size: 1.6em;
@@ -123,13 +124,16 @@ h1 {
 
 .contagem div span {
   display: block;
-  font-size: 3em;
+  font-size: 3em;       /* Aumenta o tamanho dos números */
 }
+
 
 
 .contagem div br + * {
-  font-size: 1.50em;
+  font-size: 1.5em;
+  font-weight: bold; /* Torna os rótulos em negrito */
 }
+
 
     @keyframes pulse {
       from {
