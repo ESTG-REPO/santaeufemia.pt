@@ -75,18 +75,20 @@
       font-weight: bold;
       color: orange;
     }
-     .fundo-festa {
-      background: linear-gradient(135deg, #ff6ec4, #7873f5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #fff;
-      margin: 0;
-      overflow: hidden;
-    }
+.fundo-festa {
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* <-- alinha para o topo */
+  height: 100vh;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #fff;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 60px; /* <-- margem no topo */
+}
+
 
 h1 {
   font-size: 4.0em;
@@ -108,21 +110,22 @@ h1 {
   box-sizing: border-box;
 }
 
-
 .contagem div {
   background: rgba(255, 255, 255, 0.15);
-  padding: 10px;
-  border-radius: 12px;
-  flex: 1 1 70px;
-  max-width: 90px;
+  padding: 20px;
+  border-radius: 16px;
+  flex: 1 1 100px;
+  max-width: 120px;
   text-align: center;
   white-space: nowrap;
-  font-size: 1.2em;
+  font-size: 1.6em;
 }
+
 .contagem div span {
   display: block;
-  font-size: 2em;
+  font-size: 3em;
 }
+
 
 .contagem div br + * {
   font-size: 1.50em;
@@ -410,31 +413,33 @@ h1 {
 </section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/2453899" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/html-builder.html">HTML Website Creator</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/vimeoplayer/player.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
 
           
-  <script>
-    const contagemDecrescente = () => {
-      const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
-      const agora = new Date().getTime();
-      const diferenca = dataAlvo - agora;
+<script>
+  const contagemDecrescente = () => {
+    const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
+    const agora = new Date().getTime();
+    const diferenca = dataAlvo - agora;
 
-      const segundo = 1000;
-      const minuto = segundo * 60;
-      const hora = minuto * 60;
-      const dia = hora * 24;
+    if (diferenca < 0) return; // já passou, evita valores negativos
 
-      const d = Math.floor(diferenca / dia);
-      const h = Math.floor((diferenca % dia) / hora);
-      const m = Math.floor((diferenca % hora) / minuto);
-      const s = Math.floor((diferenca % minuto) / segundo);
+    const segundo = 1000;
+    const minuto = segundo * 60;
+    const hora = minuto * 60;
+    const dia = hora * 24;
 
-      document.getElementById('dias').innerText = d;
-      document.getElementById('horas').innerText = h;
-      document.getElementById('minutos').innerText = m;
-      document.getElementById('segundos').innerText = s;
-    };
+    const d = Math.floor(diferenca / dia);
+    const h = Math.floor((diferenca % dia) / hora);
+    const m = Math.floor((diferenca % hora) / minuto);
+    const s = Math.floor((diferenca % minuto) / segundo);
 
-    setInterval(contagemDecrescente, 1000);
-    contagemDecrescente(); // Chamada inicial
-  </script>
+    document.getElementById('dias').innerText = d;
+    document.getElementById('horas').innerText = h;
+    document.getElementById('minutos').innerText = m;
+    document.getElementById('segundos').innerText = s;
+  };
+
+  setInterval(contagemDecrescente, 1000);
+  contagemDecrescente();
+</script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
