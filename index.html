@@ -74,6 +74,50 @@
       font-weight: bold;
       color: orange;
     }
+     .fundo-festa {
+      background: linear-gradient(135deg, #ff6ec4, #7873f5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #fff;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #000;
+    }
+
+    .contagem {
+      display: flex;
+      gap: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 1px 1px #333;
+      animation: pulse 2s infinite alternate;
+    }
+
+    .contagem div {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.05);
+      }
+    }
   </style>
 
 </head>
@@ -125,52 +169,13 @@
       </div>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const mainVideo = document.getElementById("main-video");
-        const bgVideo = document.getElementById("bg-video");
-
-        mainVideo.volume = 0.5;
-
-        // Sync background video with main video
-        mainVideo.addEventListener("play", () => bgVideo.play());
-        mainVideo.addEventListener("pause", () => bgVideo.pause());
-        mainVideo.addEventListener("seeked", () => { bgVideo.currentTime = mainVideo.currentTime; });
-      });
-    </script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const mainVideo = document.getElementById("main-video");
-    const bgVideo = document.getElementById("bg-video");
-
-    // Define o volume para 50%
-    mainVideo.volume = 0.5;
-
-    // Tenta forçar autoplay com som após pequeno atraso (alguns browsers exigem interação)
-    const playPromise = mainVideo.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // Vídeo começou a reproduzir com som
-        })
-        .catch((error) => {
-          // Em navegadores onde o autoplay com som falha, mostramos instrução ao utilizador
-          console.warn("Autoplay com som bloqueado. Clique para ativar o vídeo.");
-          mainVideo.muted = true;
-          mainVideo.play();
-        });
-    }
-
-    // Sincroniza vídeo de fundo com o principal
-    mainVideo.addEventListener("play", () => bgVideo.play());
-    mainVideo.addEventListener("pause", () => bgVideo.pause());
-    mainVideo.addEventListener("seeked", () => {
-      bgVideo.currentTime = mainVideo.currentTime;
-    });
-  });
-</script>
-
+<h1>Contagem para a Festa 🎉</h1>
+  <div class="contagem">
+    <div><span id="dias">0</span><br>Dias</div>
+    <div><span id="horas">0</span><br>Horas</div>
+    <div><span id="minutos">0</span><br>Minutos</div>
+    <div><span id="segundos">0</span><br>Segundos</div>
+  </div>
     
   </section>
   <div class="container-fluid">
@@ -385,7 +390,79 @@
         </div>
     </div>
 </section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/2453899" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/html-builder.html">HTML Website Creator</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/parallax/jarallax.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/vimeoplayer/player.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
-  
-  
+
+          
+  <script>
+    const contagemDecrescente = () => {
+      const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
+      const agora = new Date().getTime();
+      const diferenca = dataAlvo - agora;
+
+      const segundo = 1000;
+      const minuto = segundo * 60;
+      const hora = minuto * 60;
+      const dia = hora * 24;
+
+      const d = Math.floor(diferenca / dia);
+      const h = Math.floor((diferenca % dia) / hora);
+      const m = Math.floor((diferenca % hora) / minuto);
+      const s = Math.floor((diferenca % minuto) / segundo);
+
+      document.getElementById('dias').innerText = d;
+      document.getElementById('horas').innerText = h;
+      document.getElementById('minutos').innerText = m;
+      document.getElementById('segundos').innerText = s;
+    };
+
+    setInterval(contagemDecrescente, 1000);
+    contagemDecrescente(); // Chamada inicial
+  </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mainVideo = document.getElementById("main-video");
+        const bgVideo = document.getElementById("bg-video");
+
+        mainVideo.volume = 0.5;
+
+        // Sync background video with main video
+        mainVideo.addEventListener("play", () => bgVideo.play());
+        mainVideo.addEventListener("pause", () => bgVideo.pause());
+        mainVideo.addEventListener("seeked", () => { bgVideo.currentTime = mainVideo.currentTime; });
+      });
+    </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mainVideo = document.getElementById("main-video");
+    const bgVideo = document.getElementById("bg-video");
+
+    // Define o volume para 50%
+    mainVideo.volume = 0.5;
+
+    // Tenta forçar autoplay com som após pequeno atraso (alguns browsers exigem interação)
+    const playPromise = mainVideo.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Vídeo começou a reproduzir com som
+        })
+        .catch((error) => {
+          // Em navegadores onde o autoplay com som falha, mostramos instrução ao utilizador
+          console.warn("Autoplay com som bloqueado. Clique para ativar o vídeo.");
+          mainVideo.muted = true;
+          mainVideo.play();
+        });
+    }
+
+    // Sincroniza vídeo de fundo com o principal
+    mainVideo.addEventListener("play", () => bgVideo.play());
+    mainVideo.addEventListener("pause", () => bgVideo.pause());
+    mainVideo.addEventListener("seeked", () => {
+      bgVideo.currentTime = mainVideo.currentTime;
+    });
+  });
+</script>
+          
 </body>
 </html>
