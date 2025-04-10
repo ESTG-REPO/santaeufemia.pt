@@ -11,6 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo.jpg-278x75.jpg" type="image/x-icon">
   <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Home</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
@@ -93,22 +94,27 @@
       text-shadow: 2px 2px #000;
     }
 
-    .contagem {
-      display: flex;
-      gap: 20px;
-      font-size: 2em;
-      font-weight: bold;
-      text-shadow: 1px 1px #333;
-      animation: pulse 2s infinite alternate;
-    }
+.contagem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 6vw; /* Responsivo ao ecrã */
+  font-weight: bold;
+  text-shadow: 1px 1px #333;
+  animation: pulse 2s infinite alternate;
+  max-width: 90vw;
+  text-align: center;
+}
 
-    .contagem div {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 15px;
-      min-width: 80px;
-      text-align: center;
-    }
+.contagem div {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 15px;
+  min-width: 60px;
+  flex: 1 1 80px;
+}
 
     @keyframes pulse {
       from {
