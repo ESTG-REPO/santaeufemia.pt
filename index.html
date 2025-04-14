@@ -152,9 +152,22 @@ h1 {
         /*
     CONTAGEM PARA A FESTA STOP
     */
+      .responsive-logo {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-height: 150px;
+  }
+
+  @media (max-width: 768px) {
+    .responsive-logo {
+      max-height: 200px;
+    }
     /*
     NEXT ROADMAP ->>>> SHARE ICONS IN EACH IMAGE WITH FONT-AWESOME
     */
+    
   </style>
 
 </head>
@@ -165,10 +178,9 @@ h1 {
       <div class="container">
         <div class="navbar-brand">
           <span class="navbar-logo">
-            <a href="index.html#video05-4">
-              <img src="assets/images/favicon.png" alt="Santa Eufémia Logo" 
-                   style="max-width: 100%; height: auto; display: block; margin: 0 auto; max-height: 150px;">
-                  </a>
+              <a href="index.html#video05-4">
+                <img src="assets/images/favicon.png" alt="Santa Eufémia Logo" class="responsive-logo">
+              </a>
           </span>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
