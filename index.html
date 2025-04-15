@@ -140,7 +140,17 @@ h1 {
   font-weight: bold; /* Torna os rótulos em negrito */
 }
 
+/* Basic styling for the logo */
+    .navbar-logo img {
+      width: auto; /* Maintains the aspect ratio */
+      height: 15rem; /* Fixed height */
+    }
 
+    /* Optional: Adjust navbar logo for small screens */
+    @media (max-width: 768px) {
+      .navbar-logo img {
+        height: 15rem !important; /* Override any other styles if necessary */
+      }
     @keyframes pulse {
       from {
         transform: scale(1);
@@ -156,18 +166,6 @@ h1 {
     NEXT ROADMAP ->>>> SHARE ICONS IN EACH IMAGE WITH FONT-AWESOME
     */
 
-  /* Lock logo size for all screen sizes */
-  .navbar-logo img {
-    height: 15rem !important; /* Force the height to stay at 15rem */
-    width: auto !important;   /* Maintain aspect ratio */
-  }
-
-  /* Ensure the logo size stays locked even on mobile */
-  @media (max-width: 768px) {
-    .navbar-logo img {
-      height: 15rem !important;
-      width: auto !important;
-    }
 
   </style>
 
@@ -175,13 +173,13 @@ h1 {
 <body>
   <!-- Main Menu -->
   <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container">
-        <div class="navbar-brand">
+        <div class="navbar-brand navbar-logo">
           <span class="navbar-logo">
-					<a href="index.html#video05-4">
-						<img src="assets/images/favicon.png-2-593x741.png" alt="Mobirise Website Builder" style="height: 15rem;">
-					</a>
+	<a href="index.html#video05-4">
+	<img src="assets/images/favicon.png-2-593x741.png" alt="Mobirise Website Builder" style="height: 15rem;">
+	</a>
           </span>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -412,7 +410,32 @@ h1 {
 <div class="text-box">
     <i class="fas fa-info-circle"></i> version -> 1.57
 </div>
-  
+
+ <script>
+    // Function to lock the logo size
+    function lockLogoSize() {
+      const logo = document.getElementById('navbar-logo-img');
+      const windowWidth = window.innerWidth;
+
+      // Adjust logo size based on window width
+      if (windowWidth <= 768) {
+        // For mobile (screen width <= 768px), use a fixed size
+        logo.style.height = '15rem';
+        logo.style.width = 'auto'; // Maintain aspect ratio
+      } else {
+        // For larger screens (screen width > 768px), you can set a different size if needed
+        logo.style.height = '15rem'; // Keep height consistent
+        logo.style.width = 'auto'; // Keep aspect ratio
+      }
+    }
+
+    // Apply the lockLogoSize function when the page is loaded
+    window.onload = lockLogoSize;
+
+    // Apply the lockLogoSize function on window resize
+    window.onresize = lockLogoSize;
+  </script>
+	
 <script>
   const contagemDecrescente = () => {
     const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
