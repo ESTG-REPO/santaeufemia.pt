@@ -411,31 +411,6 @@ h1 {
     <i class="fas fa-info-circle"></i> version -> 1.57
 </div>
 
- <script>
-    // Function to lock the logo size
-    function lockLogoSize() {
-      const logo = document.getElementById('navbar-logo-img');
-      const windowWidth = window.innerWidth;
-
-      // Adjust logo size based on window width
-      if (windowWidth <= 768) {
-        // For mobile (screen width <= 768px), use a fixed size
-        logo.style.height = '15rem';
-        logo.style.width = 'auto'; // Maintain aspect ratio
-      } else {
-        // For larger screens (screen width > 768px), you can set a different size if needed
-        logo.style.height = '15rem'; // Keep height consistent
-        logo.style.width = 'auto'; // Keep aspect ratio
-      }
-    }
-
-    // Apply the lockLogoSize function when the page is loaded
-    window.onload = lockLogoSize;
-
-    // Apply the lockLogoSize function on window resize
-    window.onresize = lockLogoSize;
-  </script>
-	
 <script>
   const contagemDecrescente = () => {
     const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
