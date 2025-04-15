@@ -161,23 +161,7 @@ h1 {
   </style>
 
 </head>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const thumbs = document.querySelectorAll('[data-bs-slide-to]');
-    const modal = new bootstrap.Modal(document.getElementById('uHTitHa7Hd-modal'));
-    const carousel = document.querySelector('#lb-uHTitHa7Hd');
-    const bsCarousel = new bootstrap.Carousel(carousel);
 
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', function (event) {
-        event.preventDefault();
-        const index = parseInt(this.getAttribute('data-bs-slide-to'));
-        modal.show();
-        bsCarousel.to(index);
-      });
-    });
-  });
-</script>
 <body>
   <!-- Main Menu -->
   <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
@@ -703,7 +687,41 @@ h1 {
     document.addEventListener("click", enableVideoSound);
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const thumbs = document.querySelectorAll('[data-bs-slide-to]');
+    const modal = new bootstrap.Modal(document.getElementById('uHTitHa7Hd-modal'));
+    const carousel = document.querySelector('#lb-uHTitHa7Hd');
+    const bsCarousel = new bootstrap.Carousel(carousel);
 
-          
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', function (event) {
+        event.preventDefault();
+        const index = parseInt(this.getAttribute('data-bs-slide-to'));
+        modal.show();
+        bsCarousel.to(index);
+      });
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modalEl = document.getElementById('uHTitHa7Hd-modal');
+    const carouselEl = document.getElementById('lb-uHTitHa7Hd');
+
+    if (!modalEl || !carouselEl) return;
+
+    const modal = new bootstrap.Modal(modalEl);
+    const carousel = bootstrap.Carousel.getInstance(carouselEl) || new bootstrap.Carousel(carouselEl);
+
+    document.querySelectorAll('.item-wrapper').forEach((item, index) => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.show();
+        carousel.to(index);
+      });
+    });
+  });
+</script>          
 </body>
 </html>
