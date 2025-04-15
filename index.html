@@ -83,8 +83,114 @@
     }
 
     /*
-    NEXT ROADMAP ->>>> SHARE ICONS IN EACH IMAGE WITH FONT-AWESOME
+    start image view handler
     */
+/* Viewer container */
+.custom-photo-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Zoomable image container */
+.custom-photo-container {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* The image itself */
+.custom-photo-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  cursor: grab;
+  user-select: none;
+}
+
+/* Share buttons */
+.custom-share-icons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.custom-share-button {
+  color: #fff;
+  font-size: 24px;
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.custom-share-button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Close button */
+.custom-close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 28px;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  padding: 10px 14px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background 0.3s;
+}
+
+.custom-close-button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Optional: zoom buttons */
+.custom-zoom-controls {
+  display: flex;
+  gap: 12px;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10001;
+}
+
+.custom-zoom-button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.custom-zoom-button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Prevent body scroll when viewer is active */
+body.custom-photo-viewer-active {
+  overflow: hidden;
+}
   </style>
 
 </head>
@@ -389,7 +495,33 @@
 <div class="text-box">
     <i class="fas fa-info-circle"></i> version -> 1.79
 </div>
-  
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom/dist/panzoom.min.js"></script>
+
+<script>
+  // Enable zoom/pan
+  const image = document.getElementById('zoomableImage');
+  const panzoom = Panzoom(image, {
+    maxScale: 4,
+    contain: 'outside',
+  });
+  image.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+
+  // Toggle Zoom
+  let zoomed = false;
+  function toggleZoom() {
+    zoomed = !zoomed;
+    panzoom.zoomTo(zoomed ? 2 : 1);
+  }
+
+  // Copy to clipboard
+  function copyToClipboard() {
+    const url = "https://cdn.xperia.pt/1000001591.jpg";
+    navigator.clipboard.writeText(url).then(() => {
+      alert("Link copied! Paste on Instagram bio/story.");
+    });
+  }
+</script>
 <script>
   const contagemDecrescente = () => {
     const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
