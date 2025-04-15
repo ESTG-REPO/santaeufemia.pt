@@ -514,7 +514,7 @@ h1 {
                         <div class="carousel slide" id="lb-uHTitHa7Hd" data-ride="carousel" data-bs-ride="carousel" data-interval="3000" data-bs-interval="3000">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100" src="assets/images/mbr-872x1308.jpg" alt="Mobirise Website Builder">
+                                    <img class="d-block w-100" src="https://cdn.xperia.pt/1000001591.jpg" alt="Mobirise Website Builder">
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block w-100" src="assets/images/mbr-872x1308.jpg" alt="Mobirise Website Builder">
@@ -539,7 +539,7 @@ h1 {
                                 
                             </div>
                             <ol class="carousel-indicators">
-                                <li data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#lb-uHTitHa7Hd" data-bs-target="#lb-uHTitHa7Hd"></li>
+                                </li> data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#lb-uHTitHa7Hd" data-bs-target="#lb-uHTitHa7Hd"></li>
                                 <li data-slide-to="1" data-bs-slide-to="1" data-target="#lb-uHTitHa7Hd" data-bs-target="#lb-uHTitHa7Hd"></li>
                                 <li data-slide-to="2" data-bs-slide-to="2" data-target="#lb-uHTitHa7Hd" data-bs-target="#lb-uHTitHa7Hd"></li>
                                 <li data-slide-to="3" data-bs-slide-to="3" data-target="#lb-uHTitHa7Hd" data-bs-target="#lb-uHTitHa7Hd"></li>
@@ -647,7 +647,7 @@ h1 {
           // Vídeo começou a reproduzir com som
         })
         .catch((error) => {
-          // Em navegadores onde o autoplay com som falha, mostramos instrução ao utilizador
+          // Em browsers onde o autoplay com som falha, mostramos instrução ao utilizador
           console.warn("Autoplay com som bloqueado. Clique para ativar o vídeo.");
           mainVideo.muted = true;
           mainVideo.play();
@@ -687,41 +687,6 @@ h1 {
     document.addEventListener("click", enableVideoSound);
   });
 </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const thumbs = document.querySelectorAll('[data-bs-slide-to]');
-    const modal = new bootstrap.Modal(document.getElementById('uHTitHa7Hd-modal'));
-    const carousel = document.querySelector('#lb-uHTitHa7Hd');
-    const bsCarousel = new bootstrap.Carousel(carousel);
-
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', function (event) {
-        event.preventDefault();
-        const index = parseInt(this.getAttribute('data-bs-slide-to'));
-        modal.show();
-        bsCarousel.to(index);
-      });
-    });
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const modalEl = document.getElementById('uHTitHa7Hd-modal');
-    const carouselEl = document.getElementById('lb-uHTitHa7Hd');
-
-    if (!modalEl || !carouselEl) return;
-
-    const modal = new bootstrap.Modal(modalEl);
-    const carousel = bootstrap.Carousel.getInstance(carouselEl) || new bootstrap.Carousel(carouselEl);
-
-    document.querySelectorAll('.item-wrapper').forEach((item, index) => {
-      item.addEventListener('click', function (e) {
-        e.preventDefault();
-        modal.show();
-        carousel.to(index);
-      });
-    });
-  });
-</script>          
+       
 </body>
 </html>
