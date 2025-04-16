@@ -86,28 +86,25 @@
       color: orange;
     }
 .carousel-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 50px auto;
   padding: 0 15px;
 }
 
 .photo-carousel {
   width: 100%;
-  margin: 0;
-}
-
-.carousel-item {
-  padding: 0 10px;
+  margin: 0 auto;
 }
 
 .carousel-item img {
-  width: 100%;
-  height: auto; /* Let image define height */
+  width: auto;
+  max-width: 100%;
+  height: auto;
   max-height: 600px;
-  object-fit: contain; /* Show full image, no cropping */
-  border-radius: 8px;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
+  border-radius: 8px;
 }
 
 .slick-prev, .slick-next {
@@ -124,6 +121,7 @@
 .slick-prev:focus, .slick-next:focus {
   outline: none;
 }
+
 
 
   </style>
@@ -186,26 +184,13 @@
       </div>
     </div>
 
- <div class="carousel-container">
-    <div class="photo-carousel">
-      <!-- Carousel Items -->
-      <div class="carousel-item">
-        <img src="https://cdn.xperia.pt/party.png" alt="Image 1">
-      </div>
-      <div class="carousel-item">
-        <img src="" alt="Image 2">
-      </div>
-      <div class="carousel-item">
-        <img src=""alt="Image 3">
-      </div>
-      <div class="carousel-item">
-        <img src=""alt="Image 4">
-      </div>
-      <div class="carousel-item">
-        <img src=""alt="Image 5">
-      </div>
+<div class="carousel-container">
+  <div class="photo-carousel">
+    <div class="carousel-item">
+      <img src="https://cdn.xperia.pt/party.png" alt="Party Image">
     </div>
   </div>
+</div>
 
   </section>
   <div class="container-fluid">
@@ -566,20 +551,22 @@
     document.addEventListener("click", enableVideoSound);
   });
 </script>
+  
 <script>
   $(document).ready(function(){
     $('.photo-carousel').slick({
       infinite: true,
-      slidesToShow: 1,         // Show one full image at a time
+      slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 3000,
       dots: true,
       arrows: true,
-      adaptiveHeight: true     // Adjust carousel height to image height
+      adaptiveHeight: true
     });
   });
 </script>
+
 
 
   
