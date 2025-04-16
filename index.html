@@ -146,6 +146,7 @@
 }
 
 .share-bar {
+  background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -186,7 +187,17 @@
 .share-icon.instagram:hover {
   background-color: #e4405f;
 }
+.share-text {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: 10px;
+  font-weight: bold;  /* Ensures the text is bold */
+}
 
+.share-text p {
+  margin: 0; /* Removes default margin from the p element */
+}
     
   </style>
 
@@ -477,6 +488,14 @@
 </html>'>
   </iframe>
 </div>
+  
+<!-- Photo Viewer HTML -->
+
+<div class="custom-photo-viewer" style="margin: 0; padding: 0;">
+  <a href="https://cdn.xperia.pt/1000001591.jpg" data-fancybox="gallery" data-caption="...">
+    <img id="zoomableImage" src="https://cdn.xperia.pt/1000001591.jpg" alt="cartaz das festas" />
+  </a>
+</div>
 
 <div class="share-bar">
   <a href="https://wa.me/?text=https://cdn.xperia.pt/1000001591.jpg%20Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia" target="_blank" class="share-icon whatsapp">
@@ -491,14 +510,11 @@
   <a href="https://www.instagram.com/?url=https://cdn.xperia.pt/1000001591.jpg" target="_blank" class="share-icon instagram">
     <i class="bi bi-instagram"></i>
   </a>
+
+<div class="share-text">
+  <p>Partilha a Festa Agora!!👇</p>
 </div>
   
-<!-- Photo Viewer HTML -->
-
-<div class="custom-photo-viewer" style="margin: 0; padding: 0;">
-  <a href="https://cdn.xperia.pt/1000001591.jpg" data-fancybox="gallery" data-caption="...">
-    <img id="zoomableImage" src="https://cdn.xperia.pt/1000001591.jpg" alt="cartaz das festas" />
-  </a>
 </div>
   
 <footer class="mbr-section footer1 cid-tIsjhWS5IM" id="footer1-2" style="position: relative; overflow: hidden;">
