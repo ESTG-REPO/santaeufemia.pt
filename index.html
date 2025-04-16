@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v6.0.1, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:image:src" content="assets/images/index-meta.jpg">
   <meta property="og:image" content="assets/images/index-meta.jpg">
   <meta name="twitter:title" content="Home">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo.jpg-278x75.jpg" type="image/x-icon">
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Home</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/logo.jpg-278x75.jpg" type="image/x-icon">
+
+  <!-- CSS Files -->
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -22,205 +22,132 @@
   <link rel="stylesheet" href="assets/parallax/jarallax.css">
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ" type="text/css">
+
+  <!-- External Fonts -->
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Dela+Gothic+One:400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dela+Gothic+One:400&display=swap"></noscript>
+
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Golos+Text:400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Golos+Text:400,500,600,700,800,900&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ" type="text/css">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
+
+  <!-- Fancybox + Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const mainVideo = document.getElementById("mainVideo");
-    const bgVideo = document.getElementById("bgVideo");
+  <!-- Tailwind CSS via CDN (correto) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    let syncCheckInterval = null;
-    let frameSyncRunning = false;
-
-    const MAX_DRIFT = 0.03; // seconds
-    const SYNC_INTERVAL = 500; // milliseconds
-
-    function hardSync() {
-      try {
-        if (!isNaN(mainVideo.currentTime)) {
-          bgVideo.currentTime = mainVideo.currentTime;
-        }
-      } catch (e) {
-        console.warn("Hard sync failed:", e);
-      }
-    }
-
-    function syncLoop() {
-      if (!frameSyncRunning) return;
-
-      try {
-        const drift = Math.abs(mainVideo.currentTime - bgVideo.currentTime);
-        if (drift > MAX_DRIFT) {
-          bgVideo.currentTime = mainVideo.currentTime;
-        }
-      } catch (e) {
-        console.warn("Frame sync error:", e);
-      }
-
-      requestAnimationFrame(syncLoop);
-    }
-
-    function startSync() {
-      try {
-        hardSync();
-        bgVideo.play().catch(err => console.warn("Background video play error:", err));
-        bgVideo.playbackRate = mainVideo.playbackRate;
-
-        frameSyncRunning = true;
-        requestAnimationFrame(syncLoop);
-
-        syncCheckInterval = setInterval(() => {
-          try {
-            const drift = Math.abs(mainVideo.currentTime - bgVideo.currentTime);
-            if (drift > MAX_DRIFT) {
-              hardSync();
-            }
-          } catch (e) {
-            console.warn("Interval sync error:", e);
-          }
-        }, SYNC_INTERVAL);
-      } catch (e) {
-        console.error("Start sync error:", e);
-      }
-    }
-
-    function stopSync() {
-      try {
-        bgVideo.pause();
-        frameSyncRunning = false;
-        if (syncCheckInterval) {
-          clearInterval(syncCheckInterval);
-          syncCheckInterval = null;
-        }
-      } catch (e) {
-        console.warn("Stop sync error:", e);
-      }
-    }
-
-    mainVideo.addEventListener("ended", () => {
-      if (mainVideo.loop) {
-        try {
-          bgVideo.currentTime = 0;
-          bgVideo.play().catch(e => console.warn("Background loop restart error:", e));
-        } catch (e) {
-          console.warn("Loop sync error:", e);
-        }
-      }
-    });
-
-    mainVideo.addEventListener("play", startSync);
-    mainVideo.addEventListener("pause", stopSync);
-    mainVideo.addEventListener("seeked", hardSync);
-
-    mainVideo.addEventListener("ratechange", () => {
-      try {
-        bgVideo.playbackRate = mainVideo.playbackRate;
-      } catch (e) {
-        console.warn("Rate sync error:", e);
-      }
-    });
-
-    window.addEventListener("beforeunload", stopSync);
-  });
-</script>
-
-  
-  <!-- Custom Styles -->
   <style>
-    .video-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 0;
-      background-color: #000;
-    }
+  .video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+    background-color: #000;
+  }
 
-    .video-container {
-      position: relative;
-      width: 1256px;
-      height: 800px;
-      overflow: hidden;
-    }
+  .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 1256px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
 
-    .background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(20px) brightness(0.5);
-      z-index: 1;
-    }
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px) brightness(0.7);
+    z-index: 1;
+  }
 
-    .foreground-video {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      z-index: 2;
-    }
+  .foreground-video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+  }
 
-    .title-wrapper {
-      text-align: center;
-      color: #fff;
-      margin-bottom: 2rem;
-    }
+  .title-wrapper {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
 
+  .title-wrapper h4 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: orange;
+  }
+
+  @media (max-width: 768px) {
     .title-wrapper h4 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: orange;
+      font-size: 1.5rem;
     }
 
-    
+    .video-wrapper {
+      padding: 2rem 0;
+    }
+  }
+</style>
 
-  </style>
 
 </head>
 
-<body>
-  <!-- Main Menu -->
-  <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-      <div class="container">
-        <div class="navbar-brand">
-          <span class="navbar-logo">
-            <a href="index.html#video05-4">
-              <img src="assets/images/logo.jpg-278x75.jpg" alt="Mobirise Website Builder" style="height: 5rem;">
-            </a>
-          </span>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <div class="hamburger">
-            <span></span><span></span><span></span><span></span>
-          </div>
-        </button>
-        
-        <!-- Navbar Links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="page1.html#gallery01-b"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 1</a></li>
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="page2.html#gallery01-1g"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 2</a></li>
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="page3.html#gallery01-2k"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 3</a></li>
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="https://www.facebook.com/profile.php?id=61558164688622" target="_blank">
-                <img src="https://cdn.xperia.pt/Facebook_f_logo_(2019).svg" alt="Facebook" style="width: 30px; height: 30px;">
-              </a>
-            </li>
-          </ul>
-        </div>
+<section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg bg-white shadow-md">
+    <div class="container flex items-center justify-between py-2">
+      <div class="navbar-brand">
+        <span class="navbar-logo">
+          <a href="index.html#video05-4">
+            <img src="assets/images/logo.jpg-278x75.jpg" alt="Mobirise Website Builder" style="height: 5rem;">
+          </a>
+        </span>
       </div>
-    </nav>
-  </section>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav nav-dropdown nav-right space-x-2 md:space-x-4" data-app-modern-menu="true">
+          <li class="nav-item">
+            <a class="nav-link link show text-primary display-4 flex items-center gap-2 px-2" href="page1.html#gallery01-b">
+              <span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 1
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link show text-primary display-4 flex items-center gap-2 px-2" href="page2.html#gallery01-1g">
+              <span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 2
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link show text-primary display-4 flex items-center gap-2 px-2" href="page3.html#gallery01-2k">
+              <span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 3
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link show text-primary display-4 px-2" href="https://www.facebook.com/profile.php?id=61558164688622" target="_blank">
+              <img src="https://cdn.xperia.pt/Facebook_f_logo_(2019).svg" alt="Facebook" class="w-[30px] h-[30px]">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</section>
+
 
   <!-- Video Section -->
   <section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
