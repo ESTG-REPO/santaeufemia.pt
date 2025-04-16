@@ -85,40 +85,42 @@
       font-weight: bold;
       color: orange;
     }
+.carousel-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 15px;
+}
 
-    .carousel-container {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 15px;
-    }
+.photo-carousel {
+  width: 100%;
+  margin: 0;
+}
 
-    .photo-carousel {
-      width: 100%;
-      margin: 0;
-    }
+/* Allow variable height and show full image */
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
 
-    /* Fixed height and width for images */
-    .carousel-item img {
-      width: 100%;
-      height: 400px; /* Fixed height */
-      object-fit: cover; /* Ensures images fill the container while maintaining aspect ratio */
-      border-radius: 8px;
-    }
+.slick-prev, .slick-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  z-index: 1;
+}
 
-    .slick-prev, .slick-next {
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      border-radius: 50%;
-      z-index: 1;
-    }
+.slick-prev:hover, .slick-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
 
-    .slick-prev:hover, .slick-next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
+.slick-prev:focus, .slick-next:focus {
+  outline: none;
+}
 
-    .slick-prev:focus, .slick-next:focus {
-      outline: none;
-    }
 
   </style>
 
@@ -561,33 +563,34 @@
   });
 </script>
 
-  <script>
-    $(document).ready(function(){
-      $('.photo-carousel').slick({
-        infinite: true,         // Infinite looping
-        slidesToShow: 3,        // Show 3 items at a time
-        slidesToScroll: 1,      // Scroll 1 item at a time
-        autoplay: true,         // Auto scroll
-        autoplaySpeed: 3000,    // Speed of autoplay (3 seconds)
-        dots: true,             // Show navigation dots
-        arrows: true,           // Show next/prev arrows
-        responsive: [
-          {
-            breakpoint: 1024,  // For larger screens
-            settings: {
-              slidesToShow: 3
-            }
-          },
-          {
-            breakpoint: 600,   // For smaller screens
-            settings: {
-              slidesToShow: 1
-            }
+<script>
+  $(document).ready(function(){
+    $('.photo-carousel').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      dots: true,
+      arrows: true,
+      adaptiveHeight: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3
           }
-        ]
-      });
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
     });
-  </script>
+  });
+</script>
 
   
 </body>
