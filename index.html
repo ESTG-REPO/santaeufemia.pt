@@ -560,33 +560,33 @@
   });
 </script>
 
-<script>
-  $(document).ready(function(){
-    $('.photo-carousel').slick({
-      infinite: true,         // Infinite looping
-      slidesToShow: 3,        // Show 3 items at a time
-      slidesToScroll: 1,      // Scroll 1 item at a time
-      autoplay: true,         // Auto scroll
-      autoplaySpeed: 2000,    // Speed of autoplay
-      dots: true,             // Show navigation dots
-      arrows: true,           // Show next/prev arrows
-      responsive: [
-        {
-          breakpoint: 1024,  // For larger screens
-          settings: {
-            slidesToShow: 3
+  <script>
+    $(document).ready(function(){
+      $('.photo-carousel').slick({
+        infinite: true,         // Infinite looping
+        slidesToShow: 3,        // Show 3 items at a time
+        slidesToScroll: 1,      // Scroll 1 item at a time
+        autoplay: true,         // Auto scroll
+        autoplaySpeed: 3000,    // Speed of autoplay (3 seconds)
+        dots: true,             // Show navigation dots
+        arrows: true,           // Show next/prev arrows
+        responsive: [
+          {
+            breakpoint: 1024,  // For larger screens
+            settings: {
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 600,   // For smaller screens
+            settings: {
+              slidesToShow: 1
+            }
           }
-        },
-        {
-          breakpoint: 600,   // For smaller screens
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
+        ]
+      });
     });
-  });
-</script>
+  </script>
 
   
 </body>
