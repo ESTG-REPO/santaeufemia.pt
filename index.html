@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,62 +44,59 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
- <!-- Custom Styles -->
-  <style>
-    .video-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 0;
-      background-color: #000;
-    }
+<!-- Custom Styles -->
+<style>
+  .video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+    background-color: #000;
+  }
 
-    .video-container {
-      position: relative;
-      width: 1256px;
-      height: 800px;
-      overflow: hidden;
-    }
+  .video-container {
+    position: relative;
+    width: 1256px;
+    height: 800px;
+    overflow: hidden;
+  }
 
-    .background-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(20px) brightness(0.5);
-      z-index: 1;
-    }
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px) brightness(0.5);
+    z-index: 1;
+  }
 
-    .foreground-video {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      z-index: 2;
-    }
+  .foreground-video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+  }
 
-    .title-wrapper {
-      text-align: center;
-      color: #fff;
-      margin-bottom: 2rem;
-    }
+  .title-wrapper {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
 
-    .title-wrapper h4 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: orange;
-    }
-
-    
-
-  </style>
+  .title-wrapper h4 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: orange;
+  }
+</style>
 
 </head>
 <body>
   <!-- Main Menu -->
-  <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
+<section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
       <div class="container">
         <div class="navbar-brand">
@@ -119,10 +115,23 @@
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="page1.html#gallery01-b"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 1</a></li>
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="page2.html#gallery01-1g"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 2</a></li>
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="page3.html#gallery01-2k"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 3</a></li>
-            <li class="nav-item"><a class="nav-link link show text-primary display-4" href="https://www.facebook.com/profile.php?id=61558164688622" target="_blank">
+            <li class="nav-item">
+              <a class="nav-link link show text-primary display-4" href="page1.html#gallery01-b">
+                <span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 1
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link show text-primary display-4" href="page2.html#gallery01-1g">
+                <span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 2
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link show text-primary display-4" href="page3.html#gallery01-2k">
+                <span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 3
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link show text-primary display-4" href="https://www.facebook.com/profile.php?id=61558164688622" target="_blank">
                 <img src="https://cdn.xperia.pt/Facebook_f_logo_(2019).svg" alt="Facebook" style="width: 30px; height: 30px;">
               </a>
             </li>
@@ -131,38 +140,29 @@
       </div>
     </nav>
   </section>
-
+  
 <!-- Video Section -->
-  <section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
-    <div class="container-fluid">
-      <div class="title-wrapper">
-        <h4 class="mbr-section-maintitle mbr-fonts-style mb-0 display-2">
-          <strong>Festas da Páscoa Santa Eufémia 2025</strong>
-        </h4>
-      </div>
-      <div class="video-wrapper">
-        <div class="video-container">
-          <video id="bg-video" class="background-video" autoplay unmuted loop playsinline controls>
-            <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
-          </video>
-          <video id="main-video" class="foreground-video" autoplay muted loop playsinline controls>
-            <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-    
-  </section>
+<section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
   <div class="container-fluid">
-    <div class="row">
-      <div class="content-wrap col-12 col-md-12">
-        
+    <div class="title-wrapper">
+      <h4 class="mbr-section-maintitle mbr-fonts-style mb-0 display-2">
+        <strong>Festas da Páscoa Santa Eufémia 2025</strong>
+      </h4>
+    </div>
+    <div class="video-wrapper">
+      <div class="video-container">
+        <video id="bg-video" class="background-video" autoplay unmuted loop playsinline controls>
+          <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
+        </video>
+        <video id="main-video" class="foreground-video" autoplay muted loop playsinline controls>
+          <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
 </section>
 
-  <div class="fixed inset-0 z-50">
+<div class="fixed inset-0 z-50">
   <iframe
     class="w-full h-full border-none"
     style="width: 100vw; height: 100vh; border: none;"
@@ -175,8 +175,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Localização | Santa Eufémia</title>
-  <link href="<!-- Tailwind CSS -->
-  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />" />
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
@@ -278,10 +277,10 @@
       .three-canvas {
         display: none;
       }
-    html, body {
-  height: 100%;
-  overflow: hidden;  /* Prevents vertical scrolling */
-  }
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
     }
   </style>
 </head>
@@ -356,6 +355,7 @@
   </iframe>
 </div>
 
+  
 <!-- Photo Viewer HTML -->
 
 <div class="custom-photo-viewer">
