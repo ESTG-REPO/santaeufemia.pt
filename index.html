@@ -629,6 +629,18 @@
         }, 1000); // Wait 1 second after scroll to hide the navbar
       }
     }, 3000); // 3-second delay before starting the scroll
+
+    // Detect scroll position and show navbar when scrolling to the top
+    window.addEventListener("scroll", function() {
+      const navbar = document.getElementById("menu03-2");
+
+      if (window.scrollY === 0) {
+        // If the user scrolls to the top, show the navbar
+        if (navbar) {
+          navbar.style.display = 'block';
+        }
+      }
+    });
   });
 </script>
 
