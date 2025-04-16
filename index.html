@@ -144,24 +144,50 @@
   height: auto;
   border-radius: 8px;
 }
-.share-icons {
+
+.share-bar {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 20px;
+  padding: 20px 0;
 }
 
-.share-icons a {
+.share-icon {
+  display: inline-block;
   font-size: 30px;
-  color: #333;
-  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #f4f4f4;
+  border-radius: 50%;
+  color: #555;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.share-icons a:hover {
-  color: #007bff;
+.share-icon:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1);
 }
 
+.share-icon.whatsapp:hover {
+  background-color: #25D366;
+}
+
+.share-icon.facebook:hover {
+  background-color: #3b5998;
+}
+
+.share-icon.messenger:hover {
+  background-color: #0084ff;
+}
+
+.share-icon.instagram:hover {
+  background-color: #e4405f;
+}
+
+    
   </style>
 
 </head>
@@ -452,33 +478,20 @@
   </iframe>
 </div>
 
-<div class="share-icons">
-  <!-- WhatsApp -->
-  <a href="https://wa.me/?text=Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia%20https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on WhatsApp">
+<div class="share-bar">
+  <a href="https://wa.me/?text=https://cdn.xperia.pt/1000001591.jpg%20Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia" target="_blank" class="share-icon whatsapp">
     <i class="bi bi-whatsapp"></i>
   </a>
-
-  <!-- Facebook -->
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cdn.xperia.pt/1000001591.jpg" target="_blank" class="share-icon facebook">
     <i class="bi bi-facebook"></i>
   </a>
-
-  <!-- Messenger -->
-  <a href="https://m.me/?text=Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia%20https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Messenger">
-    <i class="bi bi-facebook-messenger"></i>
+  <a href="https://m.me/?text=https://cdn.xperia.pt/1000001591.jpg%20Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia" target="_blank" class="share-icon messenger">
+    <i class="bi bi-messenger"></i>
   </a>
-
-  <!-- Instagram Messages (No direct link, placeholder for now) -->
-  <a href="https://www.instagram.com/direct/new/?text=Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia%20https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Instagram Messages">
-    <i class="bi bi-instagram"></i>
-  </a>
-
-  <!-- Instagram Stories (Using URL to share via Instagram story) -->
-  <a href="https://www.instagram.com/share/?url=https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Instagram Stories">
+  <a href="https://www.instagram.com/?url=https://cdn.xperia.pt/1000001591.jpg" target="_blank" class="share-icon instagram">
     <i class="bi bi-instagram"></i>
   </a>
 </div>
-
   
 <!-- Photo Viewer HTML -->
 
@@ -688,29 +701,6 @@
     });
   });
 </script>
-  
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-  // Share buttons functionality
-  const shareButtons = document.querySelectorAll('.share-icon');
-
-  shareButtons.forEach(button => {
-    button.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      const shareUrl = button.getAttribute('data-share-url');
-      const shareText = button.getAttribute('data-share-text');
-
-      if (shareUrl) {
-        // Open the appropriate sharing link in a new tab
-        window.open(shareUrl, '_blank');
-      } else {
-        console.error('Share URL is missing for the button:', button);
-      }
-    });
-  });
-});
-<script>
   
 </body>
 </html>
