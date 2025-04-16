@@ -128,10 +128,15 @@
   outline: none;
 }
 .photo-viewer {
+  background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh; /* Adjust as needed */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  position: relative;
 }
 
 .photo-viewer img {
@@ -139,9 +144,6 @@
   height: auto;
   border-radius: 8px;
 }
-
-
-
 
   </style>
 
@@ -604,7 +606,20 @@
   });
 </script>
 
-
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      // Scroll to the section with id "video05-4"
+      const videoSection = document.getElementById("video05-4");
+      if (videoSection) {
+        videoSection.scrollIntoView({
+          behavior: 'smooth', // Smooth scrolling
+          block: 'start' // Align to the top of the section
+        });
+      }
+    }, 3000); // Wait for 3 seconds before scrolling
+  });
+</script>
 
   
 </body>
