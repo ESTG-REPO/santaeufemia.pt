@@ -86,52 +86,39 @@
       color: orange;
     }
 
-.carousel-container {
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 0 15px;
-}
+    .carousel-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 15px;
+    }
 
-.photo-carousel {
-  width: 100%;
-  margin: 0;
-}
+    .photo-carousel {
+      width: 100%;
+      margin: 0;
+    }
 
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover; /* Ensures images are nicely cropped */
-}
+    /* Fixed height and width for images */
+    .carousel-item img {
+      width: 100%;
+      height: 400px; /* Fixed height */
+      object-fit: cover; /* Ensures images fill the container while maintaining aspect ratio */
+      border-radius: 8px;
+    }
 
-.slick-prev, .slick-next {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border-radius: 50%;
-  z-index: 1;
-  padding: 10px; /* Adds some padding for better button size */
-}
+    .slick-prev, .slick-next {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-.slick-prev:hover, .slick-next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
+    .slick-prev:hover, .slick-next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
 
-.slick-prev:focus, .slick-next:focus {
-  outline: none;
-}
-
-.slick-prev, .slick-next {
-  font-size: 18px; /* Adjusts the size of the navigation arrows */
-}
-
-.slick-prev {
-  left: 10px; /* Adjusts left position for the previous arrow */
-}
-
-.slick-next {
-  right: 10px; /* Adjusts right position for the next arrow */
-}
-
+    .slick-prev:focus, .slick-next:focus {
+      outline: none;
+    }
 
   </style>
 
