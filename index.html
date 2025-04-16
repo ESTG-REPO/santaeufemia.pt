@@ -96,11 +96,15 @@
   margin: 0;
 }
 
-/* Allow variable height and show full image */
+.carousel-item {
+  padding: 0 10px;
+}
+
 .carousel-item img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: auto; /* Let image define height */
+  max-height: 600px;
+  object-fit: contain; /* Show full image, no cropping */
   border-radius: 8px;
   display: block;
   margin: 0 auto;
@@ -562,35 +566,21 @@
     document.addEventListener("click", enableVideoSound);
   });
 </script>
-
 <script>
   $(document).ready(function(){
     $('.photo-carousel').slick({
       infinite: true,
-      slidesToShow: 3,
+      slidesToShow: 1,         // Show one full image at a time
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 3000,
       dots: true,
       arrows: true,
-      adaptiveHeight: true,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
+      adaptiveHeight: true     // Adjust carousel height to image height
     });
   });
 </script>
+
 
   
 </body>
