@@ -144,6 +144,23 @@
   height: auto;
   border-radius: 8px;
 }
+.share-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.share-icons a {
+  font-size: 30px;
+  color: #333;
+  text-decoration: none;
+}
+
+.share-icons a:hover {
+  color: #007bff;
+}
 
   </style>
 
@@ -443,6 +460,34 @@
   </a>
 </div>
 
+<div class="share-icons">
+  <!-- WhatsApp -->
+  <a href="https://wa.me/?text=Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia%20https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Facebook">
+    <i class="bi bi-facebook"></i>
+  </a>
+
+  <!-- Messenger -->
+  <a href="https://m.me/?text=Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia%20https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Messenger">
+    <i class="bi bi-facebook-messenger"></i>
+  </a>
+
+  <!-- Instagram Messages (No direct link, placeholder for now) -->
+  <a href="https://www.instagram.com/direct/new/?text=Tradicionais%20Festas%20Da%20Páscoa%20Santa%20Eufemia%20https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Instagram Messages">
+    <i class="bi bi-instagram"></i>
+  </a>
+
+  <!-- Instagram Stories (Using URL to share via Instagram story) -->
+  <a href="https://www.instagram.com/share/?url=https://cdn.xperia.pt/1000001591.jpg" target="_blank" title="Share on Instagram Stories">
+    <i class="bi bi-instagram"></i>
+  </a>
+</div>
+
+  
 <footer class="mbr-section footer1 cid-tIsjhWS5IM" id="footer1-2" style="position: relative; overflow: hidden;">
     <video autoplay loop muted style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
         <source src="https://cdn.xperia.pt/background1.mp4" type="video/mp4">
@@ -643,7 +688,29 @@
     });
   });
 </script>
+  
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Share buttons functionality
+  const shareButtons = document.querySelectorAll('.share-icon');
 
+  shareButtons.forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const shareUrl = button.getAttribute('data-share-url');
+      const shareText = button.getAttribute('data-share-text');
+
+      if (shareUrl) {
+        // Open the appropriate sharing link in a new tab
+        window.open(shareUrl, '_blank');
+      } else {
+        console.error('Share URL is missing for the button:', button);
+      }
+    });
+  });
+});
+<script>
   
 </body>
 </html>
