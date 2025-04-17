@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v6.0.1, mobirise.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Join us for Santa Eufémia Easter Festival 2025! Junte-se a nós na Festa da Páscoa de Santa Eufémia 2025! Festeje com alegria, tradição e momentos inesquecíveis.">
+<meta name="description" content=" Junte-se a nós na Festa da Páscoa de Santa Eufémia 2025! Festeje com alegria, tradição e momentos inesquecíveis.">
 
 <!-- Open Graph / Facebook / Messenger -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://santaeufemia.pt/">
 <meta property="og:title" content="Tradicionais Festas da Pascoa Santa Eufemia 2025">
-<meta property="og:description" content="Junte-se a nós para uma celebrações Santa Eufemia!!">
+<meta property="og:description" content="Junte-se a nós na Festa da Páscoa de Santa Eufémia 2025! Festeje com alegria, tradição e momentos inesquecíveis.">
 <meta property="og:image" content="https://cdn.xperia.pt/1000001591.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://santaeufemia.pt/">
 <meta name="twitter:title" content="Santa Eufémia Easter Festival 2025">
-<meta name="twitter:description" content="Join us for an unforgettable celebration in Santa Eufémia!">
+<meta name="twitter:description" content="Junte-se a nós na Festa da Páscoa de Santa Eufémia 2025! Festeje com alegria, tradição e momentos inesquecíveis.">
 <meta name="twitter:image" content="https://cdn.xperia.pt/1000001591.jpg">
 
 
@@ -581,106 +581,170 @@
 2.17
 </div>
 
-</script>
-<!--
-<script>
-  const contagemDecrescente = () => {
-    const dataAlvo = new Date("2025-04-19T19:00:00").getTime();
-    const agora = new Date().getTime();
-    const diferenca = dataAlvo - agora;
-
-    if (diferenca < 0) return; // já passou, evita valores negativos
-
-    const segundo = 1000;
-    const minuto = segundo * 60;
-    const hora = minuto * 60;
-    const dia = hora * 24;
-
-    const d = Math.floor(diferenca / dia);
-    const h = Math.floor((diferenca % dia) / hora);
-    const m = Math.floor((diferenca % hora) / minuto);
-    const s = Math.floor((diferenca % minuto) / segundo);
-
-    document.getElementById('dias').innerText = d;
-    document.getElementById('horas').innerText = h;
-    document.getElementById('minutos').innerText = m;
-    document.getElementById('segundos').innerText = s;
-  };
-
-  setInterval(contagemDecrescente, 1000);
-  contagemDecrescente();
-</script>
--->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const mainVideo = document.getElementById("main-video");
-        const bgVideo = document.getElementById("bg-video");
-
-        mainVideo.volume = 0.5;
-
-        // Sync background video with main video
-        mainVideo.addEventListener("play", () => bgVideo.play());
-        mainVideo.addEventListener("pause", () => bgVideo.pause());
-        mainVideo.addEventListener("seeked", () => { bgVideo.currentTime = mainVideo.currentTime; });
-      });
-    </script>
-
-<script>
+  <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const mainVideo = document.getElementById("main-video");
-    const bgVideo = document.getElementById("bg-video");
+    const mainVideo = document.getElementById("mainVideo");
+    const bgVideo = document.getElementById("bgVideo");
 
-    // Define o volume para 50%
+    // Set main volume
     mainVideo.volume = 0.5;
 
-    // Tenta forçar autoplay com som após pequeno atraso (alguns browsers exigem interação)
+    // Force autoplay with fallback
     const playPromise = mainVideo.play();
     if (playPromise !== undefined) {
       playPromise
         .then(() => {
-          // Vídeo começou a reproduzir com som
+          bgVideo.play();
         })
-        .catch((error) => {
-          // Em browsers onde o autoplay com som falha, mostramos instrução ao utilizador
-          console.warn("Autoplay com som bloqueado. Clique para ativar o vídeo.");
+        .catch(() => {
           mainVideo.muted = true;
           mainVideo.play();
+          bgVideo.play();
         });
     }
 
-    // Sincroniza vídeo de fundo com o principal
+    // Mirror play/pause/seek
     mainVideo.addEventListener("play", () => bgVideo.play());
     mainVideo.addEventListener("pause", () => bgVideo.pause());
     mainVideo.addEventListener("seeked", () => {
       bgVideo.currentTime = mainVideo.currentTime;
     });
+
+    // Ultra-precise drift correction
+    let syncThreshold = 0.1; // 100ms drift tolerance
+    let lastDrift = 0;
+    let isRunning = true;
+
+    function syncLoop() {
+      if (!isRunning) return;
+
+      const drift = Math.abs(mainVideo.currentTime - bgVideo.currentTime);
+
+      if (drift > syncThreshold) {
+        bgVideo.currentTime = mainVideo.currentTime;
+        lastDrift = drift;
+      }
+
+      requestAnimationFrame(syncLoop);
+    }
+
+    // Backup for low-performance devices
+    setInterval(() => {
+      if (mainVideo.paused || bgVideo.paused) return;
+
+      const drift = Math.abs(mainVideo.currentTime - bgVideo.currentTime);
+      if (drift > syncThreshold) {
+        bgVideo.currentTime = mainVideo.currentTime;
+      }
+    }, 500);
+
+    // Start the sync loop
+    requestAnimationFrame(syncLoop);
+
+    // Stop syncing if videos are unloaded
+    ["ended", "emptied", "error"].forEach(evt => {
+      mainVideo.addEventListener(evt, () => isRunning = false);
+    });
   });
 </script>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const bgVideo = document.getElementById("bg-video");
-    if (!bgVideo) return; // Exit if not found
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const mainVideo = document.getElementById("mainVideo");
+  const bgVideo   = document.getElementById("bgVideo");
+  if (!mainVideo || !bgVideo) return;
 
-    // Ensure video starts with sound settings
-    bgVideo.muted = false;
-    bgVideo.volume = 1.0;
+  // -- 1. FORCE MUTE & AUTOPLAY WITH FALLBACK --
+  [mainVideo, bgVideo].forEach(v => {
+    v.muted = true; 
+    v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    v.volume = 0;
+    v.playsInline = true;
+  });
 
-    const enableVideoSound = () => {
-      bgVideo.play().then(() => {
-        console.log("Background video playing with sound.");
-      }).catch((err) => {
-        console.warn("User interaction required to play video with sound:", err);
+  const tryPlay = (v) => {
+    const p = v.play();
+    if (p && p.catch) {
+      p.catch(() => {
+        // will retry on user interaction
       });
+    }
+  };
 
-      // Remove this listener after first use
-      document.removeEventListener("click", enableVideoSound);
-    };
+  tryPlay(mainVideo);
+  tryPlay(bgVideo);
 
-    // Wait for the first user click to try playing with sound
-    document.addEventListener("click", enableVideoSound);
-  });
+  const onFirstInteraction = () => {
+    tryPlay(mainVideo);
+    tryPlay(bgVideo);
+    document.removeEventListener("click", onFirstInteraction);
+  };
+  document.addEventListener("click", onFirstInteraction);
+
+
+  // -- 2. SYNC SETUP --
+  let useFallback = false;
+  let rafId = null;
+  let intervalId = null;
+
+  // performance‐based fallback detection
+  setTimeout(() => {
+    try {
+      const mem = window.performance?.memory?.jsHeapSizeLimit || 0;
+      useFallback = mem && mem < 500_000_000;
+    } catch { useFallback = false; }
+    startSync();
+  }, 100);
+
+  const DRIFT_THRESHOLD = 0.05;   // seconds
+  const FALLBACK_MS      = 300;    // ms
+
+  function syncOnce() {
+    const drift = mainVideo.currentTime - bgVideo.currentTime;
+    if (Math.abs(drift) > DRIFT_THRESHOLD) {
+      bgVideo.currentTime = mainVideo.currentTime;
+      console.debug(`Sync corrected drift: ${drift.toFixed(3)}s`);
+    }
+    // mirror state
+    if (mainVideo.paused !== bgVideo.paused) {
+      mainVideo.paused ? bgVideo.pause() : tryPlay(bgVideo);
+    }
+  }
+
+  function syncLoop() {
+    syncOnce();
+    rafId = requestAnimationFrame(syncLoop);
+  }
+
+  function startSync() {
+    stopSync();
+    if (useFallback) {
+      intervalId = setInterval(syncOnce, FALLBACK_MS);
+    } else {
+      rafId = requestAnimationFrame(syncLoop);
+    }
+  }
+
+  function stopSync() {
+    if (rafId)      cancelAnimationFrame(rafId);
+    if (intervalId) clearInterval(intervalId);
+  }
+
+  // -- 3. EVENT BINDINGS --
+  mainVideo.addEventListener("play",  () => tryPlay(bgVideo));
+  mainVideo.addEventListener("pause", () => bgVideo.pause());
+  mainVideo.addEventListener("seeked",() => bgVideo.currentTime = mainVideo.currentTime);
+  mainVideo.addEventListener("ended", () => bgVideo.pause());
+
+  // if already playing on load
+  if (!mainVideo.paused) {
+    bgVideo.currentTime = mainVideo.currentTime;
+    tryPlay(bgVideo);
+  }
+});
 </script>
+
   
 <script>
   $(document).ready(function(){
