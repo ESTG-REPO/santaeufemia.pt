@@ -53,6 +53,8 @@
 
   <!-- Custom Styles -->
   <style>
+
+ /* Video section container */
     .video-wrapper {
       display: flex;
       justify-content: center;
@@ -61,6 +63,7 @@
       background-color: #000;
     }
 
+    /* Video container to hold both videos */
     .video-container {
       position: relative;
       width: 1256px;
@@ -68,25 +71,27 @@
       overflow: hidden;
     }
 
+    /* Background video (behind the foreground video) */
     .background-video {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      filter: blur(20px) brightness(0.5);
-      z-index: 1;
+      object-fit: cover; /* Ensure background video covers the container */
+      filter: blur(20px) brightness(0.5); /* Apply blur and brightness to background */
+      z-index: 1; /* Position it behind the foreground video */
     }
 
+    /* Foreground video (top layer) */
     .foreground-video {
       position: relative;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      z-index: 2;
+      object-fit: contain; /* Ensure foreground video keeps its aspect ratio */
+      z-index: 2; /* Position it above the background video */
     }
-
+    
     .title-wrapper {
       text-align: center;
       color: #fff;
@@ -258,7 +263,7 @@
   <img src="/assets/images/favicon.png" alt="Photo" />
 </div>
   
-  <!-- Video Section -->
+ <!-- Video Section -->
   <section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
     <div class="container-fluid">
       <div class="title-wrapper">
@@ -268,15 +273,18 @@
       </div>
       <div class="video-wrapper">
         <div class="video-container">
-          <video id="bg-video" class="background-video" autoplay unmuted loop playsinline controls>
-            <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
+          <!-- Background video (muted and with effects) -->
+          <video id="bg-video" class="background-video" autoplay loop playsinline muted>
+            <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
           </video>
-          <video id="main-video" class="foreground-video" autoplay muted loop playsinline controls>
-            <source src="https://cdn.xperia.pt/AQPfFG36brfAkeYQu7H-cwUVVm_koUuecgP_v8BohSZuMUjjTr7gmwkUFaTbKf3cYPwZkj3YYOur2py9jFs84L-E.mp4" type="video/mp4">
+          <!-- Foreground video (unmuted) -->
+          <video id="main-video" class="foreground-video" autoplay loop playsinline controls>
+            <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
           </video>
         </div>
       </div>
     </div>
+  </section>
 
 <div class="carousel-container">
   <div class="photo-carousel">
