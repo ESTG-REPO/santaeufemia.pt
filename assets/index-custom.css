@@ -1,0 +1,184 @@
+  <!-- Custom Styles -->
+  <style>
+
+ /* Video section container */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 0;
+      background-color: #000;
+    }
+
+    /* Video container to hold both videos */
+    .video-container {
+      position: relative;
+      width: 1256px;
+      height: 800px;
+      overflow: hidden;
+    }
+
+    /* Background video (behind the foreground video) */
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure background video covers the container */
+      filter: blur(20px) brightness(0.5); /* Apply blur and brightness to background */
+      z-index: 1; /* Position it behind the foreground video */
+    }
+
+    /* Foreground video (top layer) */
+    .foreground-video {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ensure foreground video keeps its aspect ratio */
+      z-index: 2; /* Position it above the background video */
+    }
+    
+    .title-wrapper {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    .title-wrapper h4 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: orange;
+    }
+
+/* Carousel container with background image */
+.carousel-container {
+  background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
+  background-size: cover; /* Ensure the background image covers the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-attachment: fixed; /* Keeps the background fixed during scrolling (optional) */
+  max-width: 100%; /* Ensure it stretches across the full viewport width */
+  width: 100%;
+  margin: 0; /* Remove top and bottom margins to avoid blank spaces */
+  padding: 0; /* Remove any unnecessary padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100vh; /* Make the container take up the full viewport height */
+}
+
+/* Carousel styling */
+.photo-carousel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Individual carousel items */
+.carousel-item {
+  flex: 0 0 auto;
+  margin: 0 10px;
+}
+
+/* Carousel images */
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Slick navigation arrows */
+.slick-prev, .slick-next {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slick-prev:focus, .slick-next:focus {
+  outline: none;
+}
+
+    
+.photo-viewer {
+  background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 125vh; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.photo-viewer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.share-bar {
+  background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.share-icon {
+  display: inline-block;
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #f4f4f4;
+  border-radius: 50%;
+  color: #555;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.share-icon:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.share-icon.whatsapp:hover {
+  background-color: #25D366;
+}
+
+.share-icon.facebook:hover {
+  background-color: #3b5998;
+}
+
+.share-icon.messenger:hover {
+  background-color: #0084ff;
+}
+
+.share-icon.instagram:hover {
+  background-color: #e4405f;
+}
+.share-text {
+  font-family: "Monoton", cursive;
+  font-size: 5rem;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: 10px;
+  font-weight: bold;  /* Ensures the text is bold */
+}
+
+.share-text p {
+  margin: 0; /* Removes default margin from the p element */
+}
+    
+  </style>
