@@ -1,4 +1,3 @@
-  <script>
     const text = document.getElementById("scroll-text");
 
     let pos = window.innerWidth;
@@ -14,4 +13,3 @@
     }
 
     animate();
-  </script>
