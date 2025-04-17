@@ -102,6 +102,8 @@
       font-weight: bold;
       color: orange;
     }
+
+/* Carousel container */
 .carousel-container {
   max-width: 1200px;
   margin: 50px auto;
@@ -110,26 +112,38 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background-image: url('https://santaeufemia.pt/assets/images/background1.jpg'); /* Force background image */
+  background-size: cover; /* Ensure the background covers the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background from repeating */
+  position: relative; /* Ensure it's placed correctly with respect to other elements */
 }
 
+/* Photo carousel styling */
 .photo-carousel {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+/* Individual carousel items */
 .carousel-item {
   flex: 0 0 auto;
   margin: 0 10px;
+  position: relative; /* Ensure items are positioned correctly within the carousel */
 }
 
+/* Carousel images */
 .carousel-item img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
+  max-width: 800px; /* Prevent images from stretching beyond a certain width */
+  position: relative; /* Ensure images appear correctly within their container */
 }
 
+/* Slick navigation arrows */
 .slick-prev, .slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -144,22 +158,53 @@
 .slick-prev:focus, .slick-next:focus {
   outline: none;
 }
+
+  .carousel-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Optional: dark semi-transparent overlay */
+  z-index: 0; /* Ensure the overlay is below the carousel items */
+}
+    
+/* Photo viewer container */
 .photo-viewer {
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
-  background-size: cover;
-  background-position: center;
+  background-size: cover; /* Ensure the background image covers the entire container */
+  background-position: center; /* Center the background image */
   width: 100%;
-  height: 100vh; /* Adjust as needed */
+  height: 100vh; /* Full viewport height */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  position: fixed; /* Fix the photo viewer to the viewport */
+  top: 0; /* Align the top edge with the top of the viewport */
+  left: 0; /* Align the left edge with the left of the viewport */
+  z-index: 999; /* Ensure the photo viewer is on top of other elements */
+  overflow: hidden; /* Hide any overflow from the content */
 }
 
+/* Image inside the photo viewer */
 .photo-viewer img {
-  max-width: 100%;
-  height: auto;
+  max-width: 90%; /* Limit image size to 90% of the container */
+  max-height: 90vh; /* Limit height to 90% of the viewport height */
+  object-fit: contain; /* Ensure the image maintains its aspect ratio */
   border-radius: 8px;
+}
+
+/* Optional: If you want to add an overlay to make the background image more prominent */
+.photo-viewer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: -1; /* Place the overlay behind the image */
 }
 
 .share-bar {
