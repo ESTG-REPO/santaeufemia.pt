@@ -50,58 +50,58 @@
   <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
+<!-- Custom Styles -->
   <style>
-/* Video section container */
-.video-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 0;
-  background-color: #000;
-}
 
-/* Video container to hold both videos */
-.video-container {
-  position: relative;
-  width: 1256px;
-  height: 800px;
-  overflow: hidden;
-}
+ /* Video section container */
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 0;
+      background-color: #000;
+    }
 
-/* Background video (behind the foreground video) */
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensure background video covers the container */
-  filter: blur(20px) brightness(0.5); /* Apply blur and brightness to background */
-  z-index: 1; /* Position it behind the foreground video */
-}
+    /* Video container to hold both videos */
+    .video-container {
+      position: relative;
+      width: 1256px;
+      height: 800px;
+      overflow: hidden;
+    }
 
-/* Foreground video (top layer) */
-.foreground-video {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure foreground video keeps its aspect ratio */
-  z-index: 2; /* Position it above the background video */
-}
+    /* Background video (behind the foreground video) */
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure background video covers the container */
+      filter: blur(20px) brightness(0.5); /* Apply blur and brightness to background */
+      z-index: 1; /* Position it behind the foreground video */
+    }
 
-.title-wrapper {
-  text-align: center;
-  color: #fff;
-  margin-bottom: 2rem;
-}
+    /* Foreground video (top layer) */
+    .foreground-video {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ensure foreground video keeps its aspect ratio */
+      z-index: 2; /* Position it above the background video */
+    }
+    
+    .title-wrapper {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
 
-.title-wrapper h4 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: orange;
-}
-
-/* Carousel container */
+    .title-wrapper h4 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: orange;
+    }
 .carousel-container {
   max-width: 1200px;
   margin: 50px auto;
@@ -112,20 +112,17 @@
   overflow: hidden;
 }
 
-/* Carousel styling */
 .photo-carousel {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-/* Individual carousel items */
 .carousel-item {
   flex: 0 0 auto;
   margin: 0 10px;
 }
 
-/* Carousel images */
 .carousel-item img {
   width: 100%;
   height: auto;
@@ -133,7 +130,6 @@
   border-radius: 8px;
 }
 
-/* Slick navigation arrows */
 .slick-prev, .slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -148,39 +144,22 @@
 .slick-prev:focus, .slick-next:focus {
   outline: none;
 }
-
-/* Photo viewer with background image */
 .photo-viewer {
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 100vh; /* Ensure full viewport height */
+  height: 100vh; /* Adjust as needed */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 0; /* Ensure it's behind any foreground content */
 }
 
-/* Photo viewer image styling */
 .photo-viewer img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  z-index: 2; /* Ensure image appears on top if present */
-}
-
-/* Optional: If the background image is not showing properly, add a fallback background color */
-.photo-viewer::before {
-  content: "";
-  background-color: rgba(0, 0, 0, 0.5); /* Optional fallback color */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1; /* Ensure it's below other content */
 }
 
 .share-bar {
@@ -191,7 +170,6 @@
   padding: 20px 0;
 }
 
-/* Share icon styling */
 .share-icon {
   display: inline-block;
   font-size: 30px;
@@ -205,7 +183,6 @@
   transition: background-color 0.3s, transform 0.3s;
 }
 
-/* Share icon hover effect */
 .share-icon:hover {
   background-color: #007bff;
   color: white;
@@ -227,11 +204,11 @@
 .share-icon.instagram:hover {
   background-color: #e4405f;
 }
-
 .share-text {
   font-family: "Monoton", cursive;
-  font-size: 18px; /* Fixed duplicate font-size issue */
+  font-size: 5rem;
   text-align: center;
+  font-size: 18px;
   color: #333;
   margin-top: 10px;
   font-weight: bold;  /* Ensures the text is bold */
@@ -240,8 +217,10 @@
 .share-text p {
   margin: 0; /* Removes default margin from the p element */
 }
-<style>
+    
+  </style>
 
+  
 </head>
 
 
@@ -613,6 +592,36 @@
 2.17
 </div>
 
+<!-- Photo Viewer HTML -->
+<div class="custom-photo-viewer" 
+     style="margin: 0; padding: 0;">
+  <a href="https://cdn.xperia.pt/1000001591.jpg" data-fancybox="gallery" data-caption="...">
+    <img id="zoomableImage" src="https://cdn.xperia.pt/1000001591.jpg" alt="cartaz das festas" />
+  </a>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the photo viewer element
+    const photoViewer = document.querySelector('.custom-photo-viewer');
+
+    // Check if the element exists
+    if (photoViewer) {
+      // Set background image directly using JavaScript
+      photoViewer.style.backgroundImage = "url('https://santaeufemia.pt/assets/images/background1.jpg')";
+      photoViewer.style.backgroundSize = "cover";
+      photoViewer.style.backgroundPosition = "center";
+      photoViewer.style.width = "100%";
+      photoViewer.style.height = "100vh"; // Or any desired height
+      photoViewer.style.display = "flex";
+      photoViewer.style.justifyContent = "center";
+      photoViewer.style.alignItems = "center";
+
+      // Optional: Log a message to confirm the background was set
+      console.log('Background image applied to the photo viewer.');
+    }
+  });
+</script>
 
   
 <script>
