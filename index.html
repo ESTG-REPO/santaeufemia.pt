@@ -108,14 +108,17 @@
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
   background-size: cover; /* Ensure the background image covers the entire container */
   background-position: center; /* Center the background image */
-  max-width: 1200px;
-  margin: 0 auto; /* Remove the top and bottom margins */
-  padding: 0; /* Remove padding if there's unwanted space */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-attachment: fixed; /* Keeps the background fixed during scrolling (optional) */
+  max-width: 100%; /* Ensure it stretches across the full viewport width */
+  width: 100%;
+  margin: 0; /* Remove top and bottom margins to avoid blank spaces */
+  padding: 0; /* Remove any unnecessary padding */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  height: auto; /* Ensure the height of the container fits the content */
+  height: 100vh; /* Make the container take up the full viewport height */
 }
 
 /* Carousel styling */
