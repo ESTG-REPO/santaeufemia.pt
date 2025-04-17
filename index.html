@@ -102,28 +102,36 @@
       font-weight: bold;
       color: orange;
     }
+
+/* Carousel container with background image */
 .carousel-container {
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
+  background-size: cover; /* Ensure the background image covers the entire container */
+  background-position: center; /* Center the background image */
   max-width: 1200px;
-  margin: 50px auto;
-  padding: 0 15px;
+  margin: 0 auto; /* Remove the top and bottom margins */
+  padding: 0; /* Remove padding if there's unwanted space */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  height: auto; /* Ensure the height of the container fits the content */
 }
 
+/* Carousel styling */
 .photo-carousel {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+/* Individual carousel items */
 .carousel-item {
   flex: 0 0 auto;
   margin: 0 10px;
 }
 
+/* Carousel images */
 .carousel-item img {
   width: 100%;
   height: auto;
@@ -131,6 +139,7 @@
   border-radius: 8px;
 }
 
+/* Slick navigation arrows */
 .slick-prev, .slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -145,6 +154,8 @@
 .slick-prev:focus, .slick-next:focus {
   outline: none;
 }
+
+    
 .photo-viewer {
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
   background-size: cover;
