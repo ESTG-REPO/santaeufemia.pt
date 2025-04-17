@@ -103,6 +103,8 @@
       font-weight: bold;
       color: orange;
     }
+
+    /* Carousel container */
 .carousel-container {
   max-width: 1200px;
   margin: 50px auto;
@@ -113,17 +115,20 @@
   overflow: hidden;
 }
 
+/* Carousel styling */
 .photo-carousel {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+/* Individual carousel items */
 .carousel-item {
   flex: 0 0 auto;
   margin: 0 10px;
 }
 
+/* Carousel images */
 .carousel-item img {
   width: 100%;
   height: auto;
@@ -131,6 +136,7 @@
   border-radius: 8px;
 }
 
+/* Slick navigation arrows */
 .slick-prev, .slick-next {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -145,23 +151,41 @@
 .slick-prev:focus, .slick-next:focus {
   outline: none;
 }
+
+/* Photo viewer with background image */
 .photo-viewer {
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 100vh; /* Adjust as needed */
+  height: 100vh; /* Ensure full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 0; /* Ensure it's behind any foreground content */
 }
 
+/* Photo viewer image styling */
 .photo-viewer img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
+  z-index: 2; /* Ensure image appears on top if present */
 }
+
+/* Optional: If the background image is not showing properly, add a fallback background color */
+.photo-viewer::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5); /* Optional fallback color */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Ensure it's below other content */
+}
+
 
 .share-bar {
   background-image: url('https://santaeufemia.pt/assets/images/background1.jpg');
