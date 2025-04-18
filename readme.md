@@ -1,9 +1,7 @@
 <div align="center">
 
-# Santa Eufémia em Festa 2025  
-**Official Festival Website**
-
-Crafted with passion and powered by an amazing ecosystem of web technologies.
+# Projeto Voluntário  
+**Website para as tradicionais festas da Páscoa de Santa Eufémia.**
 
 ---
 
@@ -64,6 +62,12 @@ Crafted with passion and powered by an amazing ecosystem of web technologies.
       <sub><strong>HSTS</strong></sub>
     </td>
   </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="https://img.shields.io/badge/Pixieset-000000?style=for-the-badge&logoColor=white" /><br/>
+      <sub><strong>Pixieset</strong></sub>
+    </td>
+  </tr>
 </table>
 
 ---
@@ -71,6 +75,6 @@ Crafted with passion and powered by an amazing ecosystem of web technologies.
 ### Built with care.  
 **Hosted with speed. Styled with freedom.**
 
-<sub>Crafted on Android. Designed for everyone.</sub>
+<sub>Crafted by CARDOSO. Designed for everyone.</sub>
 
 </div>
