@@ -15,19 +15,20 @@
     function tryUnmuteVideo() {
       if (triggered) return;
       triggered = true;
+
+      console.log("Attempting to unmute video...");
+
       video.muted = false;
       video.volume = 1.0;
 
-      // Try to play silently (in case browser requires it)
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log("Video attempted with sound.");
+            console.log("Video unmuted successfully.");
           })
           .catch((error) => {
-            // Show fallback if browser blocks sound
-            console.warn("Auto unmute failed. Awaiting user interaction.");
+            console.warn("Auto unmute failed. Showing overlay.", error);
             showUnmuteOverlay();
           });
       }
@@ -38,44 +39,49 @@
         overlay.style.display = "block";
 
         const activateSound = () => {
+          console.log("User tapped to enable sound.");
           video.muted = false;
           video.volume = 1.0;
           video.play();
           overlay.style.display = "none";
-          console.log("User triggered unmute.");
           document.removeEventListener("click", activateSound);
           overlay.removeEventListener("click", activateSound);
         };
 
-        // First click anywhere enables sound
         document.addEventListener("click", activateSound);
         overlay.addEventListener("click", activateSound);
       }
     }
 
-    // IntersectionObserver for modern scroll detection
+    // IntersectionObserver
     if ("IntersectionObserver" in window) {
+      console.log("Using IntersectionObserver...");
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              console.log("Section is in view.");
               tryUnmuteVideo();
             }
           });
         },
         { threshold: 0.5 }
       );
-      observer.observe(section);
+
+      // Wait a moment to ensure DOM is ready for observation
+      setTimeout(() => observer.observe(section), 100);
     } else {
-      // Fallback for older browsers
+      // Fallback scroll detection
+      console.log("Fallback scroll detection active.");
       window.addEventListener("scroll", function () {
         const rect = section.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const winH = window.innerHeight || document.documentElement.clientHeight;
 
         if (
-          rect.top < windowHeight * 0.5 &&
-          rect.bottom > windowHeight * 0.5
+          rect.top < winH * 0.5 &&
+          rect.bottom > winH * 0.5
         ) {
+          console.log("Section reached via scroll.");
           tryUnmuteVideo();
         }
       });
