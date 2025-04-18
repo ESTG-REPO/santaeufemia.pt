@@ -1,93 +1,83 @@
   document.addEventListener("DOMContentLoaded", function () {
     const sectionId = "video05-4";
-    const navbarId = "menu03-2";
-    const videoId = "main-video"; // Targeting the foreground video with this ID
-    const expectedVideoSrc = "https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4"; // Expected source URL
+    const videoId = "main-video";
+    const overlayId = "unmute-overlay";
+    const video = document.getElementById(videoId);
+    const section = document.getElementById(sectionId);
+    const overlay = document.getElementById(overlayId);
+    let triggered = false;
 
-    setTimeout(() => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        console.log("User prefers reduced motion. Skipping auto-scroll.");
-        return;
-      }
-
-      const section = document.getElementById(sectionId);
-      const navbar = document.getElementById(navbarId);
-      const video = document.getElementById(videoId);
-      const videoSrc = video?.querySelector("source")?.getAttribute("src") || "";
-
-      if (!section) {
-        console.warn(`#${sectionId} not found.`);
-        return;
-      }
-
-      scrollToSection(section);
-      hideNavbar(navbar);
-
-      setTimeout(() => {
-        if (video && videoSrc === expectedVideoSrc) {
-          tryUnmuteVideo(video);
-        } else {
-          console.warn(`Video #${videoId} not found or src doesn't match.`);
-        }
-      }, 1500); // Delay after scroll
-    }, 3000);
-
-    // Show navbar again if user scrolls to top
-    window.addEventListener("scroll", function () {
-      const navbar = document.getElementById(navbarId);
-      if (window.scrollY === 0 && navbar) {
-        navbar.style.display = "block";
-        navbar.style.opacity = "1";
-        console.log("Navbar shown.");
-      }
-    });
-
-    // Helpers
-    function scrollToSection(section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-      console.log(`Scrolled to #${sectionId}`);
+    if (!video || !section) {
+      console.warn("Video or section not found.");
+      return;
     }
 
-    function hideNavbar(navbar) {
-      if (navbar) {
-        navbar.style.transition = "opacity 0.5s ease";
-        navbar.style.opacity = "0";
-        setTimeout(() => {
-          navbar.style.display = "none";
-          console.log("Navbar hidden.");
-        }, 500);
-      }
-    }
-
-    function tryUnmuteVideo(video) {
+    function tryUnmuteVideo() {
+      if (triggered) return;
+      triggered = true;
       video.muted = false;
       video.volume = 1.0;
 
+      // Try to play silently (in case browser requires it)
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log("Video playing with sound.");
+            console.log("Video attempted with sound.");
           })
           .catch((error) => {
-            console.warn("Autoplay with sound failed.", error);
-            showUnmuteOverlay(video);
+            // Show fallback if browser blocks sound
+            console.warn("Auto unmute failed. Awaiting user interaction.");
+            showUnmuteOverlay();
           });
       }
     }
 
-    function showUnmuteOverlay(video) {
-      const overlay = document.getElementById("unmute-overlay");
-      if (!overlay) return;
+    function showUnmuteOverlay() {
+      if (overlay) {
+        overlay.style.display = "block";
 
-      overlay.style.display = "block";
+        const activateSound = () => {
+          video.muted = false;
+          video.volume = 1.0;
+          video.play();
+          overlay.style.display = "none";
+          console.log("User triggered unmute.");
+          document.removeEventListener("click", activateSound);
+          overlay.removeEventListener("click", activateSound);
+        };
 
-      overlay.addEventListener("click", function () {
-        video.muted = false;
-        video.volume = 1.0;
-        video.play();
-        overlay.style.display = "none";
-        console.log("Sound activated manually.");
+        // First click anywhere enables sound
+        document.addEventListener("click", activateSound);
+        overlay.addEventListener("click", activateSound);
+      }
+    }
+
+    // IntersectionObserver for modern scroll detection
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              tryUnmuteVideo();
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      observer.observe(section);
+    } else {
+      // Fallback for older browsers
+      window.addEventListener("scroll", function () {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        if (
+          rect.top < windowHeight * 0.5 &&
+          rect.bottom > windowHeight * 0.5
+        ) {
+          tryUnmuteVideo();
+        }
       });
     }
   });
