@@ -561,10 +561,13 @@
 <script>
   tinymce.init({
     selector: 'textarea',
+    plugins: ['autoresize'],
     menubar: false,
     toolbar: false,
     statusbar: false,
-    plugins: [],
+    autoresize_bottom_margin: 10, // Optional: space below
+    min_height: 100,              // Optional: minimum height
+    max_height: 800,              // Optional: max before scroll
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
   });
 </script>
