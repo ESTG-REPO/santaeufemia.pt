@@ -104,13 +104,6 @@
           <strong>Festas da Páscoa Santa Eufémia 2025</strong>
         </h4>
       </div>
-
-<div class="d-flex justify-content-center my-4">
-  <button id="toggleSoundBtn" class="btn btn-primary btn-lg">
-    Ativar Som
-  </button>
-</div>
-
       <div class="video-wrapper">
         <div class="video-container">
           <!-- Background video (muted and with effects) -->
@@ -592,29 +585,6 @@
     autoresize_bottom_margin: 10, // space below the editor before resizing
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
     min_height: 100               // optional: minimum editor height
-  });
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('toggleSoundBtn');
-    const videoSection = document.querySelector('#video05-4 video');
-
-    if (!videoSection) {
-      console.warn('Video not found inside #video05-4');
-      return;
-    }
-
-    btn.addEventListener('click', function () {
-      if (videoSection.muted) {
-        videoSection.muted = false;
-        videoSection.volume = 1.0;
-        btn.textContent = 'Tirar Som';
-      } else {
-        videoSection.muted = true;
-        btn.textContent = 'Ativar Som';
-      }
-    });
   });
 </script>
 
