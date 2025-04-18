@@ -72,9 +72,7 @@
 
 ---
 
-### Built with care.  
-**Hosted with speed. Styled with freedom.**
-
-<sub>Crafted by CARDOSO. Designed for everyone.</sub>
+### Made with ❤️.  
+**Crafted by CARDOSO. Designed for everyone.**
 
 </div>
