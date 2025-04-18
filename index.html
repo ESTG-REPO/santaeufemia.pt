@@ -588,5 +588,26 @@
   });
 </script>
 
+<script>
+  function enableSoundOnce() {
+    const section = document.getElementById('video05-4');
+    if (!section) return;
+
+    const video = section.querySelector('video');
+    const source = video?.querySelector('source');
+    const videoSrc = source?.getAttribute('src') || '';
+
+    if (video && videoSrc.includes('tascadosirol-20250417-0001.mp4')) {
+      video.muted = false;
+      video.volume = 1.0;
+      video.play();
+    }
+
+    document.removeEventListener('click', enableSoundOnce);
+  }
+
+  document.addEventListener('click', enableSoundOnce);
+</script>
+
 </body>
 </html>
