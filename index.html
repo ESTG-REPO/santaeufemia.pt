@@ -486,8 +486,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="/video-sync-module-debug.js"></script>
-<script src="/assets/rolling-text-module-debug.js"></script>
-
+<script src="/scroll2volume-handler.js"></script>
 
 
  <div class="text-box">
@@ -529,44 +528,6 @@
       dots: true,
       arrows: true,
       adaptiveHeight: true
-    });
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Wait 3 seconds after page load
-    setTimeout(function() {
-      const videoSection = document.getElementById("video05-4"); // Ensure the ID is correct
-      const navbar = document.getElementById("menu03-2");
-
-      if (videoSection) {
-        // Scroll to the video section
-        videoSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-
-        // Listen for the end of the scroll (after it finishes)
-        setTimeout(function() {
-          // Hide the navbar after scrolling to the video section
-          if (navbar) {
-            navbar.style.display = 'none'; // Hide the navbar
-          }
-        }, 1000); // Wait 1 second after scroll to hide the navbar
-      }
-    }, 3000); // 3-second delay before starting the scroll
-
-    // Detect scroll position and show navbar when scrolling to the top
-    window.addEventListener("scroll", function() {
-      const navbar = document.getElementById("menu03-2");
-
-      if (window.scrollY === 0) {
-        // If the user scrolls to the top, show the navbar
-        if (navbar) {
-          navbar.style.display = 'block';
-        }
-      }
     });
   });
 </script>
