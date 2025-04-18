@@ -151,24 +151,54 @@
 </section>
 
 <textarea>
-  🎉 SANTA EUFÉMIA EM FESTA 2025 🎉
-A cargo do lugar das Quintas do Sirol
-📅 19, 20 e 21 de abril
-||
-Vem celebrar connosco a tradicional festa em honra de Nossa Senhora da Conceição e de Cristo Ressuscitado, com um fim de semana cheio de música, tradição e muita animação! ✨
-||
-🔥 Destaques do programa:
-||
-📆 SÁBADO, 19 de abril
-🕤 21:30 - Banda Remember
-🕚 23:30 - Expensive Soul
-🕐 01:00 - Menasso + Deep Hunter
-||
-||
-💥 Entrada livre!
-📣 Traz a família, convida os amigos e vem viver esta grande festa!
-||
-||
+  <h2 style="text-align: center;">🎉 SANTA EUFÉMIA EM FESTA 2025 🎉</h2>
+  <p style="text-align: center;">A cargo do lugar das Quintas do Sirol<br>
+  📅 19, 20 e 21 de abril</p>
+
+  <p>Vem celebrar connosco a tradicional festa em honra de Nossa Senhora da Conceição e de Cristo Ressuscitado, com um fim de semana cheio de música, tradição e muita animação! ✨</p>
+
+  <h3>🔥 Highlights:</h3>
+
+  <h4>📆 SATURDAY, April 19</h4>
+  <ul>
+    <li>🕤 21:30 - Banda Remember</li>
+    <li>🕚 23:30 - Expensive Soul</li>
+    <li>🕐 01:00 - Menasso + Deep Hunter</li>
+  </ul>
+
+  <h4>📆 SUNDAY, April 20</h4>
+  <ul>
+    <li>🕘 09:00 - Alvorada</li>
+    <li>🕙 10:15 - Mass</li>
+    <li>🕓 16:00 - Morais Dance Studio</li>
+    <li>🕠 17:30 - Folkloric Group of Soutos da Caranguejeira</li>
+    <li>🕘 21:00 - Métodos A Soro</li>
+    <li>🕥 22:30 - Némanus</li>
+    <li>🕛 00:00 - Surprise Show</li>
+    <li>🕧 00:30 - Rolando Kruz + Pedro Lothar</li>
+  </ul>
+
+  <h4>📆 MONDAY, April 21</h4>
+  <ul>
+    <li>🕘 09:30 - Alvorada + Bagpipers</li>
+    <li>🕐 13:00 - Arrival of the Marrazes Philharmonic Band</li>
+    <li>🕑 14:00 - Procession</li>
+    <li>🕒 15:00 - Mass and procession</li>
+    <li>🕔 17:00 - Flag Handover</li>
+    <li>🕕 18:00 - Farratuga</li>
+    <li>🕘 21:00 - Inês Apenas</li>
+    <li>🕦 23:30 - Calema</li>
+    <li>🎆 Midnight - Fireworks</li>
+    <li>🎁 Raffle</li>
+    <li>🕐 01:00 - Nuno Carreira and Carlos Romão</li>
+  </ul>
+
+  <p>🍽 Restaurant open for dinner every day and great atmosphere!</p>
+
+  <p><strong>💥 Free entrance!</strong><br>
+  📣 Bring your family, invite your friends and come live the excitement!</p>
+
+  <p>#SantaEufémia2025 #QuintasDoSirol #TascaDoSirol #FestaPopular #ExpensiveSoul #Calema #Némanus #Music #Tradition</p>
 </textarea>
 
   <div class="fixed inset-0 z-50">
@@ -531,21 +561,11 @@ Vem celebrar connosco a tradicional festa em honra de Nossa Senhora da Conceiç�
 <script>
   tinymce.init({
     selector: 'textarea',
-    plugins: [
-      // Core editing features
-      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-      // Your account includes a free trial of TinyMCE premium features
-      // Try the most popular premium features until May 2, 2025:
-      'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-    ],
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+    menubar: false,
+    toolbar: false,
+    statusbar: false,
+    plugins: [],
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
   });
 </script>
 
