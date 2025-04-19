@@ -16,7 +16,8 @@ overlayButton.style.zIndex = '9999';
 overlayButton.style.cursor = 'pointer';
 overlayButton.style.maxWidth = '90%';
 overlayButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.5)';
-overlayButton.style.transition = 'all 0.3s ease-in-out';
+overlayButton.style.transition = 'opacity 0.5s ease, transform 0.3s ease-in-out';
+overlayButton.style.opacity = '0';
 
 // Hover effect
 overlayButton.onmouseover = () => {
@@ -32,14 +33,27 @@ overlayButton.onmouseout = () => {
 // Set the button text
 overlayButton.innerText = 'Clica para ativar SOM';
 
-// Append the button to the body (or anywhere you want in the document)
+// Append the button to the body
 document.body.appendChild(overlayButton);
 
-// Function to show the overlay button when the video is muted
+// Function to show the overlay with fade-in
 const showOverlayButton = () => {
   const video = document.getElementById('main-video');
   if (video && video.muted) {
-    overlayButton.style.display = 'block'; // Show the overlay when the video is muted
+    overlayButton.style.display = 'block';
+    setTimeout(() => {
+      overlayButton.style.opacity = '1';
+    }, 10);
+
+    // Auto-hide after 5 seconds if not clicked
+    setTimeout(() => {
+      if (overlayButton.style.display === 'block') {
+        overlayButton.style.opacity = '0';
+        setTimeout(() => {
+          overlayButton.style.display = 'none';
+        }, 500);
+      }
+    }, 5000);
   }
 };
 
@@ -47,19 +61,23 @@ const showOverlayButton = () => {
 overlayButton.addEventListener('click', function () {
   const video = document.getElementById('main-video');
   if (video) {
-    video.muted = false; // Unmute the video
-    overlayButton.style.display = 'none'; // Hide the overlay button after unmuting
+    video.muted = false;
+    overlayButton.style.opacity = '0';
+    setTimeout(() => {
+      overlayButton.style.display = 'none';
+    }, 500);
   }
 });
 
-// Detect when the page is loaded and check if the video is muted
+// Detect when the page is loaded and show overlay if muted
 window.addEventListener('load', showOverlayButton);
 
-// Additionally, monitor for video changes and show overlay if muted
+// Also show overlay again if video is muted later
 const video = document.getElementById('main-video');
 if (video) {
   video.addEventListener('play', showOverlayButton);
   video.addEventListener('pause', showOverlayButton);
+  video.addEventListener('volumechange', showOverlayButton);
 }
 
 // --- Auto-Scroll After 2 Seconds ---
@@ -71,24 +89,25 @@ setTimeout(() => {
       behavior: 'smooth'
     });
   }
-}, 2000); // 2 seconds delay for auto-scroll
+}, 2000);
 
-// --- Detect User Input to Activate Video Volume ---
-
-let volumeActivated = false; // Flag to check if volume was activated
+// --- Detect Any User Input to Unmute Video ---
+let volumeActivated = false;
 
 const activateVolumeOnInput = () => {
   if (!volumeActivated) {
     const video = document.getElementById('main-video');
     if (video) {
-      video.muted = false; // Unmute the video
-      volumeActivated = true; // Set flag to prevent further triggering
+      video.muted = false;
+      overlayButton.style.opacity = '0';
+      setTimeout(() => {
+        overlayButton.style.display = 'none';
+      }, 500);
     }
+    volumeActivated = true;
   }
 };
 
-// Listen for any type of user interaction: click, scroll, touch, etc.
-window.addEventListener('click', activateVolumeOnInput);
-window.addEventListener('touchstart', activateVolumeOnInput);
-window.addEventListener('scroll', activateVolumeOnInput);
-window.addEventListener('keydown', activateVolumeOnInput); // For keyboard interaction
+['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+  window.addEventListener(evt, activateVolumeOnInput, { once: true });
+});
