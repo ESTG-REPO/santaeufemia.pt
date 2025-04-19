@@ -30,7 +30,7 @@ overlayButton.onmouseout = () => {
 };
 
 // Set the button text
-overlayButton.innerText = 'Tap to enable sound';
+overlayButton.innerText = 'Clica para ativar SOM';
 
 // Append the button to the body (or anywhere you want in the document)
 document.body.appendChild(overlayButton);
