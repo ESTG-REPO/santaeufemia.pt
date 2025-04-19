@@ -1,17 +1,18 @@
 (function () {
   'use strict';
 
-  const VIDEO_CONTAINER_ID = 'video05-4';
-  const OVERLAY_ID = 'unmute-overlay';
+  const VIDEO_CONTAINER_ID = 'video05-4';  // The container holding your video
+  const VIDEO_ID = 'main-video';           // The video element ID
+  const OVERLAY_ID = 'unmute-overlay';     // The overlay ID for unmuting the video
   let userScrolled = false;
   let userInteracted = false;
   let autoScrollInitiated = false;
 
   // Helper functions to get video and overlay elements
   function getVideoElement() {
-    const container = document.getElementById(VIDEO_CONTAINER_ID);
-    if (!container) return null;
-    return container.querySelector('video') || container;
+    const video = document.getElementById(VIDEO_ID);
+    if (!video) return null;
+    return video;
   }
 
   function getOverlayElement() {
@@ -52,7 +53,7 @@
     if ('scrollBehavior' in document.documentElement.style) {
       window.scrollTo({ top: y, behavior: 'smooth' });
     } else {
-      window.scrollTo(0, y);
+      window.scrollTo(0, y);  // Fallback for older browsers
     }
 
     // Additional scroll to ensure visibility
@@ -73,14 +74,14 @@
       vid.muted = false;
       vid.volume = 1.0;
 
-      // Play video if paused
+      // Try to play the video if it's paused
       if (vid.paused) {
         vid.play().catch(() => {
-          showOverlay();
+          showOverlay();  // Show overlay if video fails to play
         });
       }
     } catch (e) {
-      showOverlay();
+      showOverlay();  // Show overlay if an error occurs
     }
 
     hideOverlay();
