@@ -1,4 +1,4 @@
-// Create the unmute overlay button programmatically
+// --- Create the unmute overlay button programmatically ---
 const overlayButton = document.createElement('div');
 overlayButton.id = 'unmute-overlay';
 overlayButton.style.display = 'none'; // Initially hidden
@@ -19,7 +19,7 @@ overlayButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.5)';
 overlayButton.style.transition = 'opacity 0.5s ease, transform 0.3s ease-in-out';
 overlayButton.style.opacity = '0';
 
-// Hover effect
+// Hover effects
 overlayButton.onmouseover = () => {
   overlayButton.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
   overlayButton.style.transform = 'translate(-50%, -50%) scale(1.05)';
@@ -29,36 +29,33 @@ overlayButton.onmouseout = () => {
   overlayButton.style.transform = 'translate(-50%, -50%)';
 };
 
-// Set the button text
+// Button text
 overlayButton.innerText = 'Clica para ativar SOM';
-
-// Append the button to the body
 document.body.appendChild(overlayButton);
 
-// Function to show the overlay with fade-in
+let overlayShown = false;
+let overlayFadeTimeout;
+
+// Show overlay with fade-in and fade-out after 7s if not clicked
 const showOverlayButton = () => {
   const video = document.getElementById('main-video');
-  if (video && video.muted) {
+  if (video && video.muted && !overlayShown) {
+    overlayShown = true;
     overlayButton.style.display = 'block';
-    setTimeout(() => {
-      overlayButton.style.opacity = '1';
-    }, 10);
+    setTimeout(() => { overlayButton.style.opacity = '1'; }, 10);
 
-    // Auto-hide after 5 seconds if not clicked
-    setTimeout(() => {
-      if (overlayButton.style.opacity === '1') {
-        overlayButton.style.opacity = '0';
-        setTimeout(() => {
-          overlayButton.style.display = 'none';
-          showFallbackButton(); // show fallback if overlay not clicked
-        }, 500);
-      }
-    }, 10000);
+    // Auto-fade-out after 7 seconds
+    overlayFadeTimeout = setTimeout(() => {
+      overlayButton.style.opacity = '0';
+      setTimeout(() => {
+        overlayButton.style.display = 'none';
+      }, 500);
+    }, 7000);
   }
 };
 
-// Click action on overlay
-overlayButton.addEventListener('click', () => {
+// Unmute on overlay click
+overlayButton.addEventListener('click', function () {
   const video = document.getElementById('main-video');
   if (video) {
     video.muted = false;
@@ -66,72 +63,58 @@ overlayButton.addEventListener('click', () => {
     setTimeout(() => {
       overlayButton.style.display = 'none';
     }, 500);
+    clearTimeout(overlayFadeTimeout);
   }
 });
 
-// Add fallback button below video
-const showFallbackButton = () => {
-  if (document.getElementById('fallback-unmute-btn')) return; // avoid duplicates
-
-  const btn = document.createElement('button');
-  btn.id = 'fallback-unmute-btn';
-  btn.className = 'btn btn-dark mt-3';
-  btn.innerText = 'Ativar som';
-  btn.onclick = () => {
-    const video = document.getElementById('main-video');
-    if (video) video.muted = false;
-    btn.remove(); // hide button after click
-  };
-
-  const container = document.querySelector('#video05-4 .container-fluid');
-  if (container) container.appendChild(btn);
-};
-
-// Detect on page load
+// Show overlay on load if video is muted
 window.addEventListener('load', showOverlayButton);
 
-// Monitor video status
+// Show overlay again if muted later
 const video = document.getElementById('main-video');
 if (video) {
   video.addEventListener('play', showOverlayButton);
   video.addEventListener('pause', showOverlayButton);
   video.addEventListener('volumechange', showOverlayButton);
+  video.addEventListener('click', activateVolumeOnInput); // Volume on video click
+}
 
-  // New: also allow clicking directly on video to unmute
-  video.addEventListener('click', () => {
-    if (video.muted) {
+// --- Auto-Scroll After 2 Seconds ---
+setTimeout(() => {
+  const videoSection = document.getElementById('video05-4');
+  if (videoSection) {
+    window.scrollTo({ top: videoSection.offsetTop, behavior: 'smooth' });
+  }
+}, 2000);
+
+// --- Detect Any User Input to Unmute Video ---
+let volumeActivated = false;
+function activateVolumeOnInput() {
+  if (!volumeActivated) {
+    const video = document.getElementById('main-video');
+    if (video) {
       video.muted = false;
       overlayButton.style.opacity = '0';
       setTimeout(() => {
         overlayButton.style.display = 'none';
       }, 500);
+      clearTimeout(overlayFadeTimeout);
     }
-  });
+    volumeActivated = true;
+
+    // Hide fallback button too
+    const fallbackBtn = document.getElementById('unmute-fallback-btn');
+    if (fallbackBtn) fallbackBtn.style.display = 'none';
+  }
 }
 
-// Auto scroll after 2 seconds
-setTimeout(() => {
-  const section = document.getElementById('video05-4');
-  if (section) {
-    window.scrollTo({
-      top: section.offsetTop,
-      behavior: 'smooth'
-    });
-  }
-}, 2000);
-
-// Detect any interaction to unmute
-let volumeActivated = false;
-const activateVolumeOnInput = () => {
-  if (!volumeActivated) {
-    if (video) video.muted = false;
-    overlayButton.style.opacity = '0';
-    setTimeout(() => {
-      overlayButton.style.display = 'none';
-    }, 500);
-    volumeActivated = true;
-  }
-};
+// Trigger on any interaction
 ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
   window.addEventListener(evt, activateVolumeOnInput, { once: true });
 });
+
+// --- Bootstrap Fallback Button Support ---
+const fallbackBtn = document.getElementById('unmute-fallback-btn');
+if (fallbackBtn) {
+  fallbackBtn.addEventListener('click', activateVolumeOnInput);
+}
