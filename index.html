@@ -50,11 +50,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  
-<!-- auto scroll detection / volume handler
-
-<script src="/scroll2volume-handler-debug.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> 
 
 /* Custom styling for the unmute overlay */
 #unmute-overlay {
@@ -126,29 +122,33 @@
 </div>
   
  <!-- Video Section -->
-  <section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
-    <div class="container-fluid">
-      <div class="title-wrapper">
-        <h4 class="mbr-section-maintitle mbr-fonts-style mb-0 display-2">
-          <strong>Festas da Páscoa Santa Eufémia 2025</strong>
-        </h4>
-      </div>
-      <div class="video-wrapper">
-        <div class="video-container">
-          <!-- Background video (muted and with effects) -->
-          <video id="bg-video" class="background-video" autoplay loop playsinline muted>
-            <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
-          </video>
-          <!-- Foreground video (unmuted) -->
-          <video id="main-video" class="foreground-video" autoplay loop playsinline controls>
-            <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
-          </video>
+<section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
+  <div class="container-fluid">
+    <div class="title-wrapper">
+      <h4 class="mbr-section-maintitle mbr-fonts-style mb-0 display-2">
+        <strong>Festas da Páscoa Santa Eufémia 2025</strong>
+      </h4>
+    </div>
+    <div class="video-wrapper">
+      <div class="video-container">
+        <!-- Background video (muted and with effects) -->
+        <video id="bg-video" class="background-video" autoplay loop playsinline muted>
+          <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
+        </video>
+
+        <!-- Foreground video (unmuted) -->
+        <video id="main-video" class="foreground-video" autoplay loop playsinline controls>
+          <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
+        </video>
+
+        <!-- Unmute overlay button -->
+        <div id="unmute-overlay" class="overlay" style="display: none;">
+          Tap to enable sound
         </div>
       </div>
     </div>
-  </section>
-
-
+  </div>
+</section>
 
   </section>
   <div class="container-fluid">
