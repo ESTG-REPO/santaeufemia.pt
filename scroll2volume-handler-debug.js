@@ -1,4 +1,4 @@
-(function () {
+(function () { 
   'use strict';
 
   const VIDEO_CONTAINER_ID = 'video05-4';
