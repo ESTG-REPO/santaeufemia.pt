@@ -53,7 +53,7 @@ const showOverlayButton = () => {
           showFallbackButton(); // show fallback if overlay not clicked
         }, 500);
       }
-    }, 5000);
+    }, 10000);
   }
 };
 
