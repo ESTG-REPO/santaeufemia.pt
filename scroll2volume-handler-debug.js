@@ -19,9 +19,6 @@ overlayButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.5)';
 overlayButton.style.transition = 'opacity 0.5s ease, transform 0.3s ease-in-out';
 overlayButton.style.opacity = '0';
 
-// Set accessibility label
-overlayButton.setAttribute('aria-label', 'Click to unmute video');
-
 // Hover effect
 overlayButton.onmouseover = () => {
   overlayButton.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
@@ -48,10 +45,13 @@ const showOverlayButton = () => {
       overlayButton.style.opacity = '1';
     }, 10);
 
-    // Auto-hide after 5 seconds if not clicked (only fade out, don't remove it)
+    // Auto-hide after 5 seconds if not clicked
     setTimeout(() => {
       if (overlayButton.style.display === 'block') {
-        overlayButton.style.opacity = '0'; // Fade out
+        overlayButton.style.opacity = '0';
+        setTimeout(() => {
+          overlayButton.style.display = 'none';
+        }, 500); // Add a slight delay to allow fade-out effect
       }
     }, 5000);
   }
@@ -62,12 +62,11 @@ overlayButton.addEventListener('click', function () {
   const video = document.getElementById('main-video');
   if (video) {
     video.muted = false;
-    overlayButton.style.opacity = '0'; // Fade out immediately after click
+    overlayButton.style.opacity = '0';
     setTimeout(() => {
-      overlayButton.style.display = 'none'; // Hide after fade-out
-    }, 500);
+      overlayButton.style.display = 'none';
+    }, 500); // Add delay for fade-out after click
   }
-  overlayButton.disabled = true; // Disable button after click to prevent further interaction
 });
 
 // Detect when the page is loaded and show overlay if muted
@@ -100,27 +99,15 @@ const activateVolumeOnInput = () => {
     const video = document.getElementById('main-video');
     if (video) {
       video.muted = false;
-      overlayButton.style.opacity = '0'; // Fade out immediately after click
+      overlayButton.style.opacity = '0';
       setTimeout(() => {
-        overlayButton.style.display = 'none'; // Hide after fade-out
+        overlayButton.style.display = 'none';
       }, 500);
     }
     volumeActivated = true;
   }
 };
 
-// Add event listeners for user interaction
 ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
   window.addEventListener(evt, activateVolumeOnInput, { once: true });
 });
-
-// --- Debouncing scroll events for better performance on mobile devices ---
-let scrollTimeout;
-const debounceScroll = () => {
-  clearTimeout(scrollTimeout);
-  scrollTimeout = setTimeout(() => {
-    activateVolumeOnInput();
-  }, 200); // Delay scroll handler to avoid rapid firing
-};
-
-window.addEventListener('scroll', debounceScroll);
