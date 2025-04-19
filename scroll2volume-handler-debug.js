@@ -42,18 +42,18 @@ const showOverlayButton = () => {
   if (video && video.muted) {
     overlayButton.style.display = 'block';
     setTimeout(() => {
-      overlayButton.style.opacity = '1';
+      overlayButton.style.opacity = '1'; // Fade in the button
     }, 10);
 
     // Auto-hide after 5 seconds if not clicked
     setTimeout(() => {
-      if (overlayButton.style.display === 'block') {
-        overlayButton.style.opacity = '0';
+      if (overlayButton.style.opacity === '1') {
+        overlayButton.style.opacity = '0'; // Start fading out
         setTimeout(() => {
-          overlayButton.style.display = 'none';
-        }, 500); // Add a slight delay to allow fade-out effect
+          overlayButton.style.display = 'none'; // Hide button after fade-out
+        }, 500); // Delay to allow fade-out effect
       }
-    }, 5000);
+    }, 5000); // 5 seconds auto-hide timer
   }
 };
 
@@ -64,8 +64,8 @@ overlayButton.addEventListener('click', function () {
     video.muted = false;
     overlayButton.style.opacity = '0';
     setTimeout(() => {
-      overlayButton.style.display = 'none';
-    }, 500); // Add delay for fade-out after click
+      overlayButton.style.display = 'none'; // Hide button after unmuting
+    }, 500); // Delay for fade-out
   }
 });
 
@@ -101,13 +101,43 @@ const activateVolumeOnInput = () => {
       video.muted = false;
       overlayButton.style.opacity = '0';
       setTimeout(() => {
-        overlayButton.style.display = 'none';
+        overlayButton.style.display = 'none'; // Hide after unmute
       }, 500);
     }
     volumeActivated = true;
   }
 };
 
+// Detect all user inputs
 ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
   window.addEventListener(evt, activateVolumeOnInput, { once: true });
 });
+
+// Fallback button HTML
+const fallbackButton = document.createElement('button');
+fallbackButton.className = 'btn btn-dark';
+fallbackButton.id = 'unmute-fallback-button';
+fallbackButton.innerText = 'Clica para ativar SOM';
+fallbackButton.style.display = 'none'; // Initially hidden
+
+// Append fallback button below the video container
+document.getElementById('video05-4').appendChild(fallbackButton);
+
+// Function to show fallback button if overlay is not available
+const showFallbackButton = () => {
+  fallbackButton.style.display = 'block';
+  fallbackButton.addEventListener('click', function () {
+    const video = document.getElementById('main-video');
+    if (video) {
+      video.muted = false;
+      fallbackButton.style.display = 'none'; // Hide after click
+    }
+  });
+};
+
+// Listen for fallback button if overlay is not shown
+setTimeout(() => {
+  if (overlayButton.style.display === 'none') {
+    showFallbackButton();
+  }
+}, 5000); // Show fallback button after 5 seconds if overlay is not shown
