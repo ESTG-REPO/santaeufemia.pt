@@ -95,6 +95,27 @@
 <div class="photo-viewer">
   <img src="/assets/images/favicon.png" alt="Photo" />
 </div>
+
+<!-- Bootstrap Unmute Button -->
+<div class="text-center mt-3">
+    <button id="unmute-fallback-btn" 
+            class="btn btn-primary btn-lg" 
+            type="button"
+            onclick="document.getElementById('main-video').muted = false; this.style.display = 'none';"
+            style="
+              background: rgba(0, 0, 0, 0.75);
+              border: 2px solid #fff;
+              border-radius: 12px;
+              padding: 15px 30px;
+              font-size: 1.2rem;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            ">
+      <i class="fas fa-volume-up me-2"></i>
+      Ativar Som
+    </button>
+  </div>
+  
   
  <!-- Video Section -->
 <section data-bs-version="5.1" class="video05 cid-uHSKsATDc7 mbr-parallax-background" id="video05-4">
@@ -116,10 +137,6 @@
           <source src="https://cdn.xperia.pt/tascadosirol-20250417-0001.mp4" type="video/mp4">
         </video>
 
-        <!-- Unmute overlay button -->
-        <div id="unmute-overlay" class="overlay" style="display: none;">
-          Tap to enable sound
-        </div>
       </div>
     </div>
   </div>
