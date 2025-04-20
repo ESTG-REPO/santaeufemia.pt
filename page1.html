@@ -93,14 +93,27 @@
         link.setAttribute('data-caption', `Foto ${i} - Dia 1`);
 
         const img = document.createElement('img');
-        img.src = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+        const imageUrl = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+
+        img.src = imageUrl;
         img.alt = `Foto ${i} - Dia 1`;
+
+        // Debugging: Log each image URL being generated
+        console.log(`Loading image: ${imageUrl}`);
+
+        // Add error handling for image load failures
+        img.onerror = () => {
+          console.error(`Image failed to load: ${imageUrl}`);
+          // Set a placeholder image when an image fails to load
+          img.src = "https://via.placeholder.com/300x300?text=Image+Not+Found"; // Fallback placeholder
+        };
 
         link.appendChild(img);
         item.appendChild(link);
         gallery.appendChild(item);
       }
 
+      // Initialize Fancybox for the gallery
       Fancybox.bind('[data-fancybox="gallery"]', {
         loop: true,
         animationEffect: "fade",
