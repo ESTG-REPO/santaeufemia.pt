@@ -2,7 +2,7 @@
 export default function initScrollToVideo() {
   let hasUserScrolled = false;
   let scrollTimeout;
-  const VIDEO_SECTION_ID = 'custom-photo-viewer';
+  const VIDEO_SECTION_ID = 'video05-4';
 
   // Function to scroll to video section
   function scrollToVideoSection() {
