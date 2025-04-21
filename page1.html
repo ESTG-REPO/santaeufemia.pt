@@ -143,12 +143,6 @@
       </div>
     </nav>
   </section>
-
-
-<div class="photo-viewer">
-  <img src="/assets/images/favicon.png" alt="Photo" />
-</div>
-
   
 <iframe 
   id="externalFrame" 
@@ -193,7 +187,7 @@
         img.onerror = () => {
           console.error(`Image failed to load: ${imageUrl}`);
           // Set a placeholder image when an image fails to load
-          img.src = "https://via.placeholder.com/300x300?text=Image+Not+Found"; // Fallback placeholder
+          img.src = "https://https://placehold.co/600x400?text=Image+Not+Found"; // Fallback placeholder
         };
 
         link.appendChild(img);
