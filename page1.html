@@ -17,16 +17,16 @@
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=Xk4VL9" type="text/css">
-  
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Fancybox -->
+  <!-- Fancybox + FileSaver -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  
+
   <style>
     .gallery-container {
       padding: 20px;
@@ -88,7 +88,7 @@
 
 <body>
 
-<!-- Linktree-style Profile Embed -->
+<!-- Linktree-style Embed -->
 <div style="margin: 80px 0 0 0; padding: 0;">
   <iframe
     src="https://same-75liighomf8-latest.netlify.app//"
@@ -141,7 +141,6 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
- <!-- fancybox js  --> 
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -149,21 +148,21 @@
     if (!gallery) return console.error('Gallery container (#gallery) not found!');
 
     for (let i = 1; i <= 125; i++) {
-      const imageUrl = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
-      const hdUrl = `https://cdn-dia1-hd.xperia.pt/Festa-${i}.jpg`;
-      const filename = `Festa-${i}.jpg`;
+      const thumbUrl = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+      const file = `Festa-${i}.jpg`;
+      const day = 1;
 
       const item = document.createElement('div');
       item.className = 'gallery-item';
 
       const link = document.createElement('a');
-      link.href = hdUrl;
+      link.href = `https://cdn-dia1-hd.xperia.pt/${file}`;
       link.setAttribute('data-fancybox', 'gallery');
-      link.setAttribute('data-caption', `Festa ${i} - Dia 1`);
+      link.setAttribute('data-caption', `Festa ${i} - Dia ${day}`);
 
       const img = document.createElement('img');
-      img.src = imageUrl;
-      img.alt = `Festa ${i} - Dia 1`;
+      img.src = thumbUrl;
+      img.alt = `Festa ${i} - Dia ${day}`;
       img.loading = 'lazy';
 
       link.appendChild(img);
@@ -179,21 +178,18 @@
                0 0 0-1 0v7.793L5.354 6.646a.5.5 0 1 0-.708.708l3.5 3.5z"/>
         </svg>
       `;
-      btn.dataset.url = hdUrl;
-      btn.dataset.name = filename;
 
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        window.open(this.dataset.url, '_blank');
-
-        fetch(this.dataset.url)
+        const url = `download.php?file=${encodeURIComponent(file)}&day=${day}`;
+        fetch(url)
           .then(res => {
             if (!res.ok) throw new Error('Network response was not ok');
             return res.blob();
           })
-          .then(blob => saveAs(blob, this.dataset.name))
+          .then(blob => saveAs(blob, file))
           .catch(err => console.error('Download failed:', err));
       });
 
@@ -218,6 +214,5 @@
   });
 </script>
 
-  
 </body>
 </html>
