@@ -141,31 +141,87 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
-  
+ <!-- fancybox js  --> 
   <script>
-// fancybox-init.js
-if (window.Fancybox) {
-  Fancybox.defaults = {
-    loop: true,
-    animationEffect: 'fade',
-    transitionEffect: 'fade',
-    buttons: ['zoom', 'slideShow', 'fullScreen', 'download', 'thumbs', 'close'],
-    preload: 2,
-    dragToClose: true,
-    keyboard: {
-      Escape: 'close', Delete: 'close', Backspace: 'close',
-      PageUp: 'next', PageDown: 'prev',
-      ArrowUp: 'next', ArrowDown: 'prev',
-      ArrowRight: 'next', ArrowLeft: 'prev'
-    }
-  };
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const gallery = document.getElementById('gallery');
+    if (!gallery) return console.error('Gallery container not found!');
 
-  // Optional rebinding if elements change dynamically
-  document.addEventListener('DOMContentLoaded', () => {
-    Fancybox.bind('[data-fancybox="gallery"]');
+    for (let i = 1; i <= 125; i++) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item position-relative';
+
+      const imageUrl = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+      const hdUrl = `https://cdn-dia1-hd.xperia.pt/Festa-${i}.jpg`;
+      const filename = `Festa-${i}.jpg`;
+
+      const link = document.createElement('a');
+      link.href = hdUrl;
+      link.setAttribute('data-fancybox', 'gallery');
+      link.setAttribute('data-caption', `Festa ${i} - Dia 1`);
+
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = `Festa ${i} - Dia 1`;
+      img.loading = 'lazy';
+
+      link.appendChild(img);
+      item.appendChild(link);
+
+      const btn = document.createElement('button');
+      btn.className = 'gallery-download-btn';
+      btn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="bi bi-download" viewBox="0 0 16 16">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5V13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10.4a.5.5 0 0 1 1 0V13a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V10.4a.5.5 0 0 1 .5-.5z"/>
+          <path fill="white" d="M7.646 10.854a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5a.5.5 
+               0 0 0-1 0v7.793L5.354 6.646a.5.5 0 1 0-.708.708l3.5 3.5z"/>
+        </svg>
+      `;
+      btn.dataset.url = hdUrl;
+      btn.dataset.name = filename;
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        fetch(this.dataset.url)
+          .then(res => {
+            if (!res.ok) throw new Error('Network response was not ok');
+            return res.blob();
+          })
+          .then(blob => saveAs(blob, this.dataset.name))
+          .catch(err => console.error('Download failed:', err));
+      });
+
+      item.appendChild(btn);
+      gallery.appendChild(item);
+    }
+
+    if (window.Fancybox) {
+      Fancybox.bind('[data-fancybox="gallery"]', {
+        Toolbar: {
+          display: ["zoom", "slideshow", "fullscreen", "download", "thumbs", "close"]
+        },
+        loop: true,
+        animated: true,
+        keyboard: {
+          Escape: "close",
+          Delete: "close",
+          Backspace: "close",
+          PageUp: "next",
+          PageDown: "prev",
+          ArrowUp: "next",
+          ArrowDown: "prev",
+          ArrowRight: "next",
+          ArrowLeft: "prev"
+        }
+      });
+    }
   });
-}
 </script>
+<script>
   
 </body>
 </html>
