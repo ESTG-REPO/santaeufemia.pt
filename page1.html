@@ -140,39 +140,38 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('gallery');
 
-    // Ensure the gallery element exists
     if (!gallery) {
       console.error('Gallery container (#gallery) not found!');
       return;
     }
 
-    // Add gallery items
     for (let i = 1; i <= 125; i++) {
       const item = document.createElement('div');
       item.className = 'gallery-item position-relative';
 
+      const imageUrl = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+
       const link = document.createElement('a');
-      link.href = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+      link.href = imageUrl;
       link.setAttribute('data-fancybox', 'gallery');
       link.setAttribute('data-caption', `Festa ${i} - Dia 1`);
 
       const img = document.createElement('img');
-      img.src = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+      img.src = imageUrl;
       img.alt = `Festa ${i} - Dia 1`;
-      
-      // lazy load feature here
       img.setAttribute('loading', 'lazy');
-      
+
       link.appendChild(img);
       item.appendChild(link);
 
-      // Create download button
+      // Download button
       const btn = document.createElement('button');
-      btn.className = 'gallery-download-btn'; // Corrected button class
+      btn.className = 'gallery-download-btn';
       btn.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
         <path d="M.5 9.9a.5.5 0 0 1 .5.5V13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10.4a.5.5 0 0 1 1 0V13a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V10.4a.5.5 0 0 1 .5-.5z"/>
@@ -180,20 +179,17 @@
       </svg>
       `;
 
-      // Attach the button to the item
-      item.appendChild(btn);
-
-      // Add the button click event listener
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        downloadImage(i); // Trigger the download function with index i
+        downloadImage(i); // Direct CDN download
       });
 
+      item.appendChild(btn);
       gallery.appendChild(item);
     }
 
-    // Fancybox initialization
+    // Fancybox
     if (window.Fancybox) {
       Fancybox.bind('[data-fancybox="gallery"]', {
         loop: true,
@@ -216,20 +212,21 @@
     }
   });
 
-  // Function to handle downloading the image
+  // ✅ Direct CDN image download
   function downloadImage(index) {
     const filename = `Festa-${index}.jpg`;
-    const downloadUrl = `download.php?file=${encodeURIComponent(index)}`;
+    const imageUrl = `https://cdn-dia1.xperia.pt/Festa-${index}.jpg`;
 
-    // Create a temporary anchor element to trigger the download
     const a = document.createElement('a');
-    a.href = downloadUrl;
-    a.download = filename; // Set the filename for download
+    a.href = imageUrl;
+    a.download = filename;
+    a.target = '_blank';
     document.body.appendChild(a);
-    a.click(); // Programmatically click the anchor to trigger the download
-    document.body.removeChild(a); // Clean up by removing the temporary anchor
+    a.click();
+    document.body.removeChild(a);
   }
 </script>
 
+  
 </body>
 </html>
