@@ -1,37 +1,47 @@
 <?php
+// Ensure the 'file' parameter is provided
 if (!isset($_GET['file'])) {
     http_response_code(400);
     echo 'Missing file parameter.';
     exit;
 }
 
-$index = intval($_GET['file']);
-if ($index < 1 || $index > 125) {
-    http_response_code(400);
-    echo 'Invalid file index.';
-    exit;
-}
+// Sanitize and validate the filename
+$filename = basename($_GET['file']);
+$remote_url = "https://cdn-dia1.xperia.pt/" . rawurlencode($filename);
 
-$filename = "Festa-$index.jpg";
-$remoteUrl = "https://cdn-dia1.xperia.pt/$filename";
+// Initialize cURL session
+$ch = curl_init($remote_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_FAILONERROR, true);
 
-// Use file_get_contents to fetch remote file
-$imageData = file_get_contents($remoteUrl);
+// Execute cURL request
+$imageData = curl_exec($ch);
+
+// Check for cURL errors
 if ($imageData === false) {
     http_response_code(404);
-    echo 'Image not found.';
+    echo 'Image not found or failed to download.';
+    curl_close($ch);
     exit;
 }
 
-// Set headers to force download
+// Get content type from cURL response
+$contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+curl_close($ch);
+
+// Set headers to prompt download
 header('Content-Description: File Transfer');
-header('Content-Type: image/jpeg');
-header("Content-Disposition: attachment; filename=\"$filename\"");
-header('Content-Length: ' . strlen($imageData));
+header('Content-Type: ' . $contentType);
+header('Content-Disposition: attachment; filename="' . $filename . '"');
+header('Content-Transfer-Encoding: binary');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');
 header('Expires: 0');
+header('Content-Length: ' . strlen($imageData));
 
+// Output the image data
 echo $imageData;
 exit;
 ?>
