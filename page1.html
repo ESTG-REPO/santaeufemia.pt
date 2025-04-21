@@ -144,57 +144,28 @@
   
   <script>
 // fancybox-init.js
-
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const bindFancybox = () => {
-    if (!window.Fancybox) {
-      console.error('Fancybox is not loaded.');
-      return;
+if (window.Fancybox) {
+  Fancybox.defaults = {
+    loop: true,
+    animationEffect: 'fade',
+    transitionEffect: 'fade',
+    buttons: ['zoom', 'slideShow', 'fullScreen', 'download', 'thumbs', 'close'],
+    preload: 2,
+    dragToClose: true,
+    keyboard: {
+      Escape: 'close', Delete: 'close', Backspace: 'close',
+      PageUp: 'next', PageDown: 'prev',
+      ArrowUp: 'next', ArrowDown: 'prev',
+      ArrowRight: 'next', ArrowLeft: 'prev'
     }
-
-    Fancybox.bind('[data-fancybox="gallery"]', {
-      loop: true,
-      animationEffect: 'fade',
-      transitionEffect: 'fade',
-      preload: 1, // Preload next image
-
-      // Enable swipe to close on mobile
-      touch: {
-        vertical: true
-      },
-
-      // Customize toolbar with download option
-      Toolbar: {
-        display: [
-          "zoom",
-          "download",
-          "fullscreen",
-          "close"
-        ]
-      },
-
-      keyboard: {
-        Escape: 'close',
-        Delete: 'close',
-        Backspace: 'close',
-        PageUp: 'next',
-        PageDown: 'prev',
-        ArrowUp: 'next',
-        ArrowDown: 'prev',
-        ArrowRight: 'next',
-        ArrowLeft: 'prev'
-      }
-    });
   };
 
-  // Initial bind
-  bindFancybox();
-
-  // Observe DOM changes to auto-bind newly added gallery items
-  const observer = new MutationObserver(bindFancybox);
-  observer.observe(document.body, { childList: true, subtree: true });
-});
+  // Optional rebinding if elements change dynamically
+  document.addEventListener('DOMContentLoaded', () => {
+    Fancybox.bind('[data-fancybox="gallery"]');
+  });
+}
 </script>
+  
 </body>
 </html>
