@@ -192,15 +192,14 @@ document.addEventListener('DOMContentLoaded', function () {
     link.appendChild(img);
     item.appendChild(link);
 
-    // Create download button with SVG icon
+    // Create download button with green background
     const btn = document.createElement('button');
-    btn.className = 'btn btn-sm btn-dark position-absolute gallery-download-btn';
+    btn.className = 'btn btn-sm btn-success position-absolute gallery-download-btn'; // Green button
     btn.style.bottom = '10px';
     btn.style.right = '10px';
     btn.style.zIndex = '2';
     btn.style.opacity = '0.85';
     btn.style.fontFamily = "'Golos Text', sans-serif";
-
     btn.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-download" viewBox="0 0 16 16">
@@ -209,31 +208,20 @@ document.addEventListener('DOMContentLoaded', function () {
       </svg>
     `;
 
+    // Attach the button to the item
+    item.appendChild(btn);
+
+    // Add the button click event listener
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      const url = `https://cdn-dia1-hd.xperia.pt/Festa-${i}.jpg`;
-
-      const a = document.createElement('a');
-      a.href = url;
-
-      // Check if download attribute is supported
-      if ('download' in a) {
-        a.download = `Festa-${i}.jpg`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      } else {
-        // Fallback: open in new tab
-        window.open(url, '_blank');
-      }
+      downloadImage(i);
     });
 
-    item.appendChild(btn);
     gallery.appendChild(item);
   }
 
-  // Ensure Fancybox binds after DOM is fully loaded
+  // Fancybox initialization
   if (window.Fancybox) {
     Fancybox.bind('[data-fancybox="gallery"]', {
       loop: true,
@@ -255,6 +243,26 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error('Fancybox is not defined. Make sure Fancybox script is loaded.');
   }
 });
+
+// Separate function to handle downloading the image
+function downloadImage(index) {
+  const url = `https://cdn-dia1-hd.xperia.pt/Festa-${index}.jpg`;
+
+  const a = document.createElement('a');
+  a.href = url;
+
+  // Check if the download attribute is supported
+  if ('download' in a) {
+    a.download = `Festa-${index}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    // Fallback: open in a new tab if download attribute isn't supported
+    window.open(url, '_blank');
+  }
+}
+
 </script>
   
 </body>
