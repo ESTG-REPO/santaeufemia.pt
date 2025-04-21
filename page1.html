@@ -142,19 +142,19 @@
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
  <!-- fancybox js  --> 
-  <script>
-    <script>
+
+<script>
   document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.getElementById('gallery');
-    if (!gallery) return console.error('Gallery container not found!');
+    if (!gallery) return console.error('Gallery container (#gallery) not found!');
 
     for (let i = 1; i <= 125; i++) {
-      const item = document.createElement('div');
-      item.className = 'gallery-item position-relative';
-
       const imageUrl = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
       const hdUrl = `https://cdn-dia1-hd.xperia.pt/Festa-${i}.jpg`;
       const filename = `Festa-${i}.jpg`;
+
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
 
       const link = document.createElement('a');
       link.href = hdUrl;
@@ -186,6 +186,8 @@
         e.preventDefault();
         e.stopPropagation();
 
+        window.open(this.dataset.url, '_blank');
+
         fetch(this.dataset.url)
           .then(res => {
             if (!res.ok) throw new Error('Network response was not ok');
@@ -201,27 +203,21 @@
 
     if (window.Fancybox) {
       Fancybox.bind('[data-fancybox="gallery"]', {
+        loop: true,
         Toolbar: {
           display: ["zoom", "slideshow", "fullscreen", "download", "thumbs", "close"]
         },
-        loop: true,
-        animated: true,
-        keyboard: {
-          Escape: "close",
-          Delete: "close",
-          Backspace: "close",
-          PageUp: "next",
-          PageDown: "prev",
-          ArrowUp: "next",
-          ArrowDown: "prev",
-          ArrowRight: "next",
-          ArrowLeft: "prev"
-        }
+        Image: {
+          zoom: true,
+        },
+        Thumbs: {
+          autoStart: false,
+        },
       });
     }
   });
 </script>
-<script>
+
   
 </body>
 </html>
