@@ -183,44 +183,46 @@
     },
     on: {
       reveal: (fancybox, slide) => {
-        const container = slide.$content?.parentElement;
-        if (!container) return;
+        // Force wait for caption to render
+        setTimeout(() => {
+          const captionBox = slide.$container?.querySelector('.fancybox__caption');
+          if (!captionBox) return;
 
-        // Remove old button if it exists
-        const existingBtn = container.querySelector('.custom-download-btn');
-        if (existingBtn) existingBtn.remove();
+          // Remove any previous download button
+          const existing = captionBox.querySelector('.custom-download-btn');
+          if (existing) existing.remove();
 
-        // Extract filename from image src
-        const imgSrc = slide.src;
-        const filename = imgSrc.split('/').pop(); // Festa-32.jpg
+          // Extract filename from image src
+          const imgSrc = slide.src || '';
+          const filename = imgSrc.split('/').pop();
+          if (!filename) return;
 
-        if (!filename) return;
+          const hdLink = `https://cdn-dia1-hd.xperia.pt/${filename}`;
 
-        const downloadUrl = `https://cdn-dia1-hd.xperia.pt/${filename}`;
+          // Create the button element
+          const btn = document.createElement('a');
+          btn.href = hdLink;
+          btn.download = filename;
+          btn.className = 'custom-download-btn';
+          btn.innerText = '⬇ Download HD';
+          btn.style.cssText = `
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #1e1e1e;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Golos Text', sans-serif;
+            transition: background 0.3s ease;
+          `;
+          btn.onmouseenter = () => btn.style.background = '#333';
+          btn.onmouseleave = () => btn.style.background = '#1e1e1e';
 
-        // Create the download button
-        const btn = document.createElement('a');
-        btn.href = downloadUrl;
-        btn.download = filename;
-        btn.innerText = "⬇ Download HD";
-        btn.className = 'custom-download-btn';
-        btn.style.cssText = `
-          display: inline-block;
-          margin-top: 15px;
-          padding: 10px 20px;
-          background: #1e1e1e;
-          color: #fff;
-          border-radius: 8px;
-          text-decoration: none;
-          font-weight: 600;
-          font-family: 'Golos Text', sans-serif;
-          transition: background 0.3s ease;
-        `;
-        btn.onmouseover = () => btn.style.background = "#333";
-        btn.onmouseout = () => btn.style.background = "#1e1e1e";
-
-        // Append button under the image
-        container.appendChild(btn);
+          // Append it to caption
+          captionBox.appendChild(btn);
+        }, 50);
       }
     }
   });
