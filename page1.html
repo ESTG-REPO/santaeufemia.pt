@@ -101,20 +101,14 @@
  -->
 
 <!-- Linktree-style Embed -->
-<div style="margin: 80px 0 0 0; padding: 0; position: relative;">
-  <iframe
-    src="https://same-75liighomf8-latest.netlify.app/"
-    style="display: block; width: 100vw; height: 650px; border: 3px solid #ddd; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 0; pointer-events: none;"
-    scrolling="no"
-    allowfullscreen
-    loading="lazy"
-    id="locked-iframe">
-  </iframe>
-
-  <!-- Overlay to pass only click/tap events to iframe -->
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;"
-       onpointerdown="document.getElementById('locked-iframe').style.pointerEvents='auto';"
-       onpointerup="setTimeout(() => { document.getElementById('locked-iframe').style.pointerEvents='none'; }, 100);">
+<div id="iframe-wrapper" style="margin: 80px 0 0 0; padding: 0; position: relative; overflow: hidden;">
+  <div id="iframe-blocker" style="width: 100vw; height: 650px;">
+    <iframe
+      src="https://same-75liighomf8-latest.netlify.app/"
+      style="width: 100%; height: 100%; border: 3px solid #ddd; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
   </div>
 </div>
 
@@ -338,6 +332,14 @@
   });
 </script>
 
+<script>
+  const blocker = document.getElementById('iframe-blocker');
+
+  // Block scroll wheel and touch gestures
+  blocker.addEventListener('wheel', e => e.preventDefault(), { passive: false });
+  blocker.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+  blocker.addEventListener('scroll', e => e.preventDefault(), { passive: false });
+</script>
   
 </body>
 </html>
