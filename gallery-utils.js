@@ -1,4 +1,3 @@
-<script>
   document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('gallery');
 
@@ -83,4 +82,3 @@
       console.error('Fancybox is not defined. Make sure Fancybox script is loaded.');
     }
   });
-</script>
