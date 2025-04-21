@@ -164,5 +164,68 @@
       });
     });
   </script>
+
+<script>
+  Fancybox.bind('[data-fancybox="gallery"]', {
+    loop: true,
+    animationEffect: "fade",
+    transitionEffect: "fade",
+    keyboard: {
+      Escape: "close",
+      Delete: "close",
+      Backspace: "close",
+      PageUp: "next",
+      PageDown: "prev",
+      ArrowUp: "next",
+      ArrowDown: "prev",
+      ArrowRight: "next",
+      ArrowLeft: "prev"
+    },
+    on: {
+      reveal: (fancybox, slide) => {
+        const container = slide.$content?.parentElement;
+        if (!container) return;
+
+        // Remove old button if it exists
+        const existingBtn = container.querySelector('.custom-download-btn');
+        if (existingBtn) existingBtn.remove();
+
+        // Extract filename from image src
+        const imgSrc = slide.src;
+        const filename = imgSrc.split('/').pop(); // Festa-32.jpg
+
+        if (!filename) return;
+
+        const downloadUrl = `https://cdn-dia1-hd.xperia.pt/${filename}`;
+
+        // Create the download button
+        const btn = document.createElement('a');
+        btn.href = downloadUrl;
+        btn.download = filename;
+        btn.innerText = "⬇ Download HD";
+        btn.className = 'custom-download-btn';
+        btn.style.cssText = `
+          display: inline-block;
+          margin-top: 15px;
+          padding: 10px 20px;
+          background: #1e1e1e;
+          color: #fff;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          font-family: 'Golos Text', sans-serif;
+          transition: background 0.3s ease;
+        `;
+        btn.onmouseover = () => btn.style.background = "#333";
+        btn.onmouseout = () => btn.style.background = "#1e1e1e";
+
+        // Append button under the image
+        container.appendChild(btn);
+      }
+    }
+  });
+</script>
+
+  
 </body>
 </html>
