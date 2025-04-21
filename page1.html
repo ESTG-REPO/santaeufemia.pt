@@ -135,36 +135,16 @@
 </div>
 
 <!-- Linktree-style Embed -->
-<iframe
-  style="width: 100%; border: none;"
-  sandbox="allow-scripts allow-same-origin allow-popups"
-  loading="lazy"
-  referrerpolicy="no-referrer"
-  onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';"
-  srcdoc='
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DavidCardosoPhotography</title>
-   
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      body 
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="profile">
-        <div class="profile-image">
-          <img src="assets/images/iframelogo.jpg" alt="David Cardoso Photography" />
-        </div>
-        <h1 class="profile-name">DavidCardosoPhotography</h1>
-        <p class="profile-description">
-          Casamentos | Família | Retratos | Maternidade // Fotografia e Filmagem
-        </p>
+  <div class="container">
+    <div class="profile">
+      <div class="profile-image">
+        <img src="assets/images/iframelogo.jpg" alt="David Cardoso Photography" />
+      </div>
+      <h1 class="profile-name">DavidCardosoPhotography</h1>
+      <p class="profile-description">
+        Casamentos | Família | Retrato | Maternidade // Fotografia e Filmagem
+      </p>
+    </div>
       </div>
       <div class="links">
         <a href="https://davidcardosophoto.pixieset.com/festasantaeufemia/" class="link-item" target="_blank" rel="noopener noreferrer">
@@ -189,14 +169,7 @@
         </a>
       </div>
     </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const links = document.querySelectorAll(".link-item");
-        links.forEach((link, index) => {
-          link.style.setProperty("--order", index + 1);
-        });
-      });
-    </script>
+
   </body>
   </html>
   '>
@@ -431,6 +404,15 @@
   blocker.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
   blocker.addEventListener('scroll', e => e.preventDefault(), { passive: false });
 </script>
-  
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const links = document.querySelectorAll(".link-item");
+        links.forEach((link, index) => {
+          link.style.setProperty("--order", index + 1);
+        });
+      });
+    </script>
+
 </body>
 </html>
