@@ -9,7 +9,7 @@ if (isset($_GET['file']) && !empty($_GET['file'])) {
     // Concatenate the full URL for the requested image
     $fileUrl = $baseUrl . $file . '.jpg';
 
-    // Validate if the file is an image on the CDN (you could check file extension, or validate file type here)
+    // Validate if the file is an image on the CDN
     if (filter_var($fileUrl, FILTER_VALIDATE_URL)) {
         // Set headers to force download
         header('Content-Description: File Transfer');
