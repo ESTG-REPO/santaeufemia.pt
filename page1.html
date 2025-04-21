@@ -166,6 +166,174 @@
   </script>
   
   <script>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>Dia 1</title>
+  <link rel="shortcut icon" href="assets/images/logo.jpg-278x75.jpg" type="image/x-icon">
+
+  <!-- Mobirise & Bootstrap CSS -->
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/parallax/jarallax.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=Xk4VL9" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+  <style>
+    .gallery-container {
+      padding: 20px;
+      position: relative;
+    }
+    .gallery-background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Linktree-style Profile Embed -->
+<div style="margin: 80px 0 0 0; padding: 0;">
+  <iframe
+    src="https://same-75liighomf8-latest.netlify.app//"
+    style="display: block; width: 100vw; height: 650px; border: 3px solid #ddd; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: 0;"
+    scrolling="no"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+</div>
+
+  
+  <!-- Navbar -->
+  <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+      <div class="container">
+        <div class="navbar-brand">
+          <span class="navbar-logo">
+            <a href="index.html#video05-4">
+              <img src="assets/images/logo.jpg-278x75.jpg" alt="Logo" style="height: 5rem;">
+            </a>
+          </span>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <div class="hamburger"><span></span><span></span><span></span><span></span></div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+            <li class="nav-item"><a class="nav-link text-primary display-4" href="page1.html#gallery01-b"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 1</a></li>
+            <li class="nav-item"><a class="nav-link text-primary display-4" href="page2.html#gallery01-1g"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 2</a></li>
+            <li class="nav-item"><a class="nav-link text-primary display-4" href="page3.html#gallery01-2k"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 3</a></li>
+            <li class="nav-item">
+              <a class="nav-link text-primary display-4" href="https://www.facebook.com/profile.php?id=61558164688622" target="_blank">
+                <img src="https://cdn.xperia.pt/Facebook_f_logo_(2019).svg" alt="Facebook" style="width: 30px; height: 30px;">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+
+  <!-- Gallery Section -->
+  <div class="gallery-container">
+    <video class="gallery-background-video" autoplay loop muted playsinline>
+      <source src="https://cdn.xperia.pt/background1.mp4" type="video/mp4">
+    </video>
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const gallery = document.getElementById('gallery');
+
+      for (let i = 1; i <= 125; i++) {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+
+        const link = document.createElement('a');
+        link.href = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+        link.setAttribute('data-fancybox', 'gallery');
+        link.setAttribute('data-caption', `Festa ${i} - Dia 1`);
+
+        const img = document.createElement('img');
+        img.src = `https://cdn-dia1.xperia.pt/Festa-${i}.jpg`;
+        img.alt = `Festa ${i} - Dia 1`;
+
+        link.appendChild(img);
+        item.appendChild(link);
+        gallery.appendChild(item);
+      }
+
+      Fancybox.bind('[data-fancybox="gallery"]', {
+        loop: true,
+        animationEffect: "fade",
+        transitionEffect: "fade",
+        keyboard: {
+          Escape: "close",
+          Delete: "close",
+          Backspace: "close",
+          PageUp: "next",
+          PageDown: "prev",
+          ArrowUp: "next",
+          ArrowDown: "prev",
+          ArrowRight: "next",
+          ArrowLeft: "prev"
+        }
+      });
+    });
+  </script>
+  
+  <script>
 document.addEventListener('DOMContentLoaded', function () {
   const gallery = document.getElementById('gallery');
 
@@ -192,14 +360,15 @@ document.addEventListener('DOMContentLoaded', function () {
     link.appendChild(img);
     item.appendChild(link);
 
-    // Create download button with green background
+    // Create download button with SVG icon
     const btn = document.createElement('button');
-    btn.className = 'btn btn-sm btn-success position-absolute gallery-download-btn'; // Green button
+    btn.className = 'btn btn-sm btn-dark position-absolute gallery-download-btn';
     btn.style.bottom = '10px';
     btn.style.right = '10px';
     btn.style.zIndex = '2';
     btn.style.opacity = '0.85';
     btn.style.fontFamily = "'Golos Text', sans-serif";
+
     btn.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-download" viewBox="0 0 16 16">
@@ -208,20 +377,31 @@ document.addEventListener('DOMContentLoaded', function () {
       </svg>
     `;
 
-    // Attach the button to the item
-    item.appendChild(btn);
-
-    // Add the button click event listener
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      downloadImage(i);
+      const url = `https://cdn-dia1-hd.xperia.pt/Festa-${i}.jpg`;
+
+      const a = document.createElement('a');
+      a.href = url;
+
+      // Check if download attribute is supported
+      if ('download' in a) {
+        a.download = `Festa-${i}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        // Fallback: open in new tab
+        window.open(url, '_blank');
+      }
     });
 
+    item.appendChild(btn);
     gallery.appendChild(item);
   }
 
-  // Fancybox initialization
+  // Ensure Fancybox binds after DOM is fully loaded
   if (window.Fancybox) {
     Fancybox.bind('[data-fancybox="gallery"]', {
       loop: true,
@@ -243,26 +423,6 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error('Fancybox is not defined. Make sure Fancybox script is loaded.');
   }
 });
-
-// Separate function to handle downloading the image
-function downloadImage(index) {
-  const url = `https://cdn-dia1-hd.xperia.pt/Festa-${index}.jpg`;
-
-  const a = document.createElement('a');
-  a.href = url;
-
-  // Check if the download attribute is supported
-  if ('download' in a) {
-    a.download = `Festa-${index}.jpg`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  } else {
-    // Fallback: open in a new tab if download attribute isn't supported
-    window.open(url, '_blank');
-  }
-}
-
 </script>
   
 </body>
