@@ -140,7 +140,6 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('gallery');
@@ -188,7 +187,7 @@
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        downloadImage(i);
+        downloadImage(i); // Trigger the download function with index i
       });
 
       gallery.appendChild(item);
@@ -220,15 +219,17 @@
   // Function to handle downloading the image
   function downloadImage(index) {
     const filename = `Festa-${index}.jpg`;
-    const downloadUrl = `download.php?file=${encodeURIComponent(filename)}`;
+    const downloadUrl = `download.php?file=${encodeURIComponent(index)}`;
 
+    // Create a temporary anchor element to trigger the download
     const a = document.createElement('a');
     a.href = downloadUrl;
-    a.download = filename;
+    a.download = filename; // Set the filename for download
     document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.click(); // Programmatically click the anchor to trigger the download
+    document.body.removeChild(a); // Clean up by removing the temporary anchor
   }
 </script>
+
 </body>
 </html>
