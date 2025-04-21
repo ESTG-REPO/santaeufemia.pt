@@ -1,47 +1,52 @@
 <?php
-// Ensure the 'file' parameter is provided
-if (!isset($_GET['file'])) {
+// Define base URLs for each day
+$baseUrls = [
+    '1' => 'https://cdn-dia1-hd.xperia.pt/',
+    '2' => 'https://cdn-dia2-hd.xperia.pt/',
+    '3' => 'https://cdn-dia3-hd.xperia.pt/'
+];
+
+// Get and sanitize inputs
+$day = isset($_GET['day']) ? $_GET['day'] : '';
+$file = isset($_GET['file']) ? basename($_GET['file']) : '';
+
+// Validate day
+if (!array_key_exists($day, $baseUrls)) {
     http_response_code(400);
-    echo 'Missing file parameter.';
+    echo 'Invalid day selected.';
     exit;
 }
 
-// Sanitize and validate the filename
-$filename = basename($_GET['file']);
-$remote_url = "https://cdn-dia1.xperia.pt/" . rawurlencode($filename);
+// Build full file URL
+$fileUrl = $baseUrls[$day] . $file;
 
-// Initialize cURL session
-$ch = curl_init($remote_url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-curl_setopt($ch, CURLOPT_FAILONERROR, true);
+// Validate URL
+$headers = @get_headers($fileUrl, 1);
+if ($headers && strpos($headers[0], '200') !== false) {
+    // Get content
+    $content = file_get_contents($fileUrl);
 
-// Execute cURL request
-$imageData = curl_exec($ch);
+    if ($content === false) {
+        http_response_code(500);
+        echo 'Failed to fetch the file.';
+        exit;
+    }
 
-// Check for cURL errors
-if ($imageData === false) {
+    // Output headers
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="' . $file . '"');
+    header('Content-Length: ' . strlen($content));
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    flush();
+
+    // Output file content
+    echo $content;
+    exit;
+} else {
     http_response_code(404);
-    echo 'Image not found or failed to download.';
-    curl_close($ch);
+    echo 'File not found.';
     exit;
 }
-
-// Get content type from cURL response
-$contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-curl_close($ch);
-
-// Set headers to prompt download
-header('Content-Description: File Transfer');
-header('Content-Type: ' . $contentType);
-header('Content-Disposition: attachment; filename="' . $filename . '"');
-header('Content-Transfer-Encoding: binary');
-header('Cache-Control: must-revalidate');
-header('Pragma: public');
-header('Expires: 0');
-header('Content-Length: ' . strlen($imageData));
-
-// Output the image data
-echo $imageData;
-exit;
 ?>
