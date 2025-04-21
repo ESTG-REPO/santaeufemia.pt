@@ -203,11 +203,27 @@
     // Fancybox
     if (window.Fancybox) {
       Fancybox.bind('[data-fancybox="gallery"]', {
-        Thumbs: false,
-        Toolbar: {
-          display: ["zoom", "fullscreen", "download", "close"]
-        }
-      });
+  loop: true,
+  Toolbar: {
+    display: [
+      "counter",
+      "zoom",
+      "slideshow",
+      "fullscreen",
+      "download",
+      "thumbs",
+      "close"
+    ]
+  },
+  Image: {
+    zoom: true,
+    click: "toggleZoom",
+    wheel: "zoom",
+  },
+  Thumbs: {
+    autoStart: true,
+  },
+  });
     }
   });
 </script>
