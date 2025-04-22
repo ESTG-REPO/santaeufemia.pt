@@ -579,5 +579,38 @@
   });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const video = document.getElementById('main-video') || document.getElementById('video05-4');
+  const unmuteBtn = document.getElementById('unmute-fallback-btn');
+  const STORAGE_KEY = 'hasInteractedWithVideo';
+
+  if (!video || !unmuteBtn) return;
+
+  // Hide button if already interacted
+  if (localStorage.getItem(STORAGE_KEY) === 'true') {
+    unmuteBtn.style.display = 'none';
+    return;
+  }
+
+  unmuteBtn.addEventListener('click', function () {
+    video.muted = false;
+    video.volume = 1;
+
+    // Force play in case autoplay failed
+    video.play().catch(() => {
+      // fallback: show a toast or notice if needed
+      console.warn("Playback with sound blocked again");
+    });
+
+    // Hide button after interaction
+    unmuteBtn.style.display = 'none';
+
+    // Save to localStorage so it doesn't show again
+    localStorage.setItem(STORAGE_KEY, 'true');
+  });
+});
+</script>
+
 </body>
 </html>
