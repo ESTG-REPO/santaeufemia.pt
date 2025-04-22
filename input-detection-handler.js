@@ -1,83 +1,131 @@
-// First Time User Input Detection and Video Sound Handler
 export default function initVideoSoundHandler() {
   const VIDEO_ID = 'main-video';
   const OVERLAY_ID = 'unmute-overlay';
   const STORAGE_KEY = 'hasInteractedWithVideo';
   let hasUserInteracted = false;
 
-  // Get DOM elements
-  const video = document.getElementById(VIDEO_ID);
+  const video = document.getElementById(VIDEO_ID) || document.getElementById("video05-4");
   const unmuteOverlay = document.getElementById(OVERLAY_ID);
 
-  // Check if user has previously interacted
+  const ua = navigator.userAgent || navigator.vendor || '';
+  const isInAppBrowser = /FBAN|FBAV|Instagram|Messenger|TikTok|Snapchat/i.test(ua);
+
   function checkPreviousInteraction() {
     return localStorage.getItem(STORAGE_KEY) === 'true';
   }
 
-  // Handle user interaction
   function handleInteraction() {
     if (!hasUserInteracted) {
       hasUserInteracted = true;
       localStorage.setItem(STORAGE_KEY, 'true');
-      
-      // Enable sound
+
       if (video) {
         video.muted = false;
-        
-        // Hide overlay after interaction
-        if (unmuteOverlay) {
-          unmuteOverlay.style.opacity = '0';
-          setTimeout(() => {
-            unmuteOverlay.style.display = 'none';
-          }, 300);
-        }
+        video.volume = 1;
+        video.play().catch(() => {}); // retry with sound
+      }
+
+      if (unmuteOverlay) {
+        unmuteOverlay.style.opacity = '0';
+        setTimeout(() => {
+          unmuteOverlay.style.display = 'none';
+        }, 300);
       }
     }
   }
 
-  // Initialize the handler
+  function ensureVideoAttributes(video) {
+    video.setAttribute('autoplay', 'true');
+    video.setAttribute('muted', 'true');
+    video.setAttribute('playsinline', 'true');
+    video.setAttribute('webkit-playsinline', 'true');
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+  }
+
+  function manualLoop(video) {
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+  }
+
+  function aggressiveAutoplay(video) {
+    if (!video) return;
+
+    ensureVideoAttributes(video);
+
+    const tryPlay = () => {
+      video.play().then(() => {
+        // success
+      }).catch(() => {
+        video.muted = true;
+        video.play().catch(() => {
+          // Wait for visibility change or interaction
+        });
+      });
+    };
+
+    tryPlay();
+
+    // Retry on visibility change (tab was inactive or delayed)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        tryPlay();
+      }
+    });
+
+    // Retry on scroll/touchstart if blocked
+    ['scroll', 'touchstart'].forEach(evt => {
+      window.addEventListener(evt, tryPlay, { passive: true, once: true });
+    });
+
+    // Aggressive retry every 2s for embedded browsers
+    if (isInAppBrowser) {
+      const autoplayInterval = setInterval(() => {
+        video.play().catch(() => {});
+      }, 2000);
+
+      setTimeout(() => clearInterval(autoplayInterval), 15000); // stop after 15s
+    }
+
+    manualLoop(video); // fallback loop
+  }
+
   function init() {
-    if (!checkPreviousInteraction() && video && unmuteOverlay) {
-      // Show overlay for first-time users with fade in
+    if (!video) return;
+
+    // Always force autoplay first
+    aggressiveAutoplay(video);
+
+    if (!checkPreviousInteraction() && unmuteOverlay) {
       unmuteOverlay.style.display = 'block';
       requestAnimationFrame(() => {
         unmuteOverlay.style.opacity = '1';
       });
-      
-      // Add event listeners for both mobile and desktop
+
       const interactionEvents = ['click', 'touchstart', 'keydown'];
-      
-      // Add events to overlay
       interactionEvents.forEach(event => {
         unmuteOverlay.addEventListener(event, handleInteraction, { passive: true });
-      });
-
-      // Add events to video
-      interactionEvents.forEach(event => {
         video.addEventListener(event, handleInteraction, { passive: true });
       });
 
-      // Add events to document for keyboard and touch
       document.addEventListener('keydown', handleInteraction);
       document.addEventListener('touchstart', handleInteraction, { passive: true });
-
-      // Handle scroll interaction
       window.addEventListener('scroll', handleInteraction, { passive: true, once: true });
     }
   }
 
-  // Start when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // Cleanup function
   return function cleanup() {
     if (video && unmuteOverlay) {
       const events = ['click', 'touchstart', 'keydown'];
-      
       events.forEach(event => {
         unmuteOverlay.removeEventListener(event, handleInteraction);
         video.removeEventListener(event, handleInteraction);
@@ -90,7 +138,6 @@ export default function initVideoSoundHandler() {
   };
 }
 
-// Fallback for non-module environments
 if (typeof window !== 'undefined') {
   if (!window.initVideoSoundHandler) {
     window.initVideoSoundHandler = initVideoSoundHandler;
