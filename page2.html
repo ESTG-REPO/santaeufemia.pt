@@ -325,7 +325,7 @@
 
         fetch(hdUrl)
           .then(response => {
-            if (!response.ok) throw new Error('Erro ao buscar imagem');
+            if (!response.ok) throw new Error('Erro, Tenta outravez');
             return response.blob();
           })
           .then(blob => saveAs(blob, file))
