@@ -38,10 +38,11 @@
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=Xk4VL9" type="text/css">
 
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Fancybox + FileSaver -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
@@ -103,6 +104,7 @@
     .gallery-download-btn:hover {
       background-color: #0056b3;
     }
+   
   </style>
 </head>
 
@@ -133,182 +135,19 @@
   </div>
 </div>
 
-<!-- Linktree-style Embed -->
-<iframe
-  style="width: 100%; border: none;"
-  sandbox="allow-scripts allow-same-origin allow-popups"
-  loading="lazy"
-  referrerpolicy="no-referrer"
-  onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';"
-  srcdoc='
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DavidCardosoPhotography</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      body {
-        background-color: #fbfbfb;
-        background-image: linear-gradient(to bottom, #f8f8f8, #fbfbfb);
-        color: #2b3232;
-        padding: 20px;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .container {
-        width: 100%;
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .profile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 36px;
-        width: 100%;
-        position: relative;
-        animation: fadeIn 0.6s ease forwards;
-      }
-      .profile::after {
-        content: "";
-        position: absolute;
-        bottom: -18px;
-        width: 40px;
-        height: 1px;
-        background-color: rgba(0, 0, 0, 0.05);
-        border-radius: 1px;
-      }
-      .profile-image {
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-bottom: 16px;
-      }
-      .profile-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .profile-name {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 8px;
-        text-align: center;
-      }
-      .profile-description {
-        font-size: 16px;
-        color: #7c7c7e;
-        text-align: center;
-        margin-bottom: 8px;
-        max-width: 90%;
-      }
-      .links {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 16px;
-      }
-      .link-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 16px 20px;
-        background-color: #2b3232;
-        color: white;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 0.4s ease forwards;
-        animation-delay: calc(0.1s * var(--order, 0));
-        opacity: 0;
-        position: relative;
-      }
-      .link-item:hover {
-        opacity: 0.95;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      }
-      .link-title {
-        font-size: 16px;
-        text-align: center;
-        flex-grow: 1;
-      }
-      .link-icon {
-        font-size: 20px;
-        color: rgba(255, 255, 255, 0.5);
-        font-weight: bold;
-        position: absolute;
-        right: 20px;
-      }
-      @media (max-width: 768px) {
-        .container { padding: 16px; }
-        .profile-description { font-size: 14px; }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="profile">
-        <div class="profile-image">
-          <img src="assets/images/iframelogo.jpg" alt="David Cardoso Photography" />
-        </div>
-        <h1 class="profile-name">DavidCardosoPhotography</h1>
-        <p class="profile-description">
-          Casamentos | Família | Retratos | Maternidade // Fotografia e Filmagem
-        </p>
-      </div>
-      <div class="links">
-        <a href="https://davidcardosophoto.pixieset.com/festasantaeufemia/" class="link-item" target="_blank" rel="noopener noreferrer">
-          <span class="link-title">📸✨ Fotos Completas Santa Eufémia 🔥👣</span>
-          <span class="link-icon">📷</span>
-        </a>
-        <a href="https://api.whatsapp.com/send?phone=351966064157" class="link-item" target="_blank" rel="noopener noreferrer">
-          <span class="link-title">WhatsApp</span>
-          <span class="link-icon">💬</span>
-        </a>
-        <a href="https://davidcardosophotography.com" class="link-item" target="_blank" rel="noopener noreferrer">
-          <span class="link-title">Website</span>
-          <span class="link-icon">🌐</span>
-        </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://fb.me/DavidCardosoPhotography" class="link-item" target="_blank" rel="noopener noreferrer">
-          <span class="link-title">Facebook</span>
-          <span class="link-icon">📘</span>
-        </a>
-        <a href="https://instagram.com/DavidCardosoPhotography" class="link-item" target="_blank" rel="noopener noreferrer">
-          <span class="link-title">Instagram</span>
-          <span class="link-icon">📸</span>
-        </a>
-      </div>
-    </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const links = document.querySelectorAll(".link-item");
-        links.forEach((link, index) => {
-          link.style.setProperty("--order", index + 1);
-        });
-      });
-    </script>
+<div style="max-width: 100%; padding: 20px; margin: 20px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <iframe 
+    src="https://same-cr6xi5okr4h-latest.netlify.app/" 
+    style="width: 100%; height: 600px; border: none; border-radius: 8px; overflow: auto;" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+
   </body>
   </html>
-  '>
-</iframe>
 
-
-  
 <!-- Navbar -->
 <section data-bs-version="5.1" class="menu menu3 cid-tHeG7yune1" once="menu" id="menu03-2">
   <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
@@ -328,11 +167,11 @@
           <li class="nav-item"><a class="nav-link text-primary display-4" href="page1.html#gallery01-b"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 1</a></li>
           <li class="nav-item"><a class="nav-link text-primary display-4" href="page2.html#gallery01-1g"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 2</a></li>
           <li class="nav-item"><a class="nav-link text-primary display-4" href="page3.html#gallery01-2k"><span class="mbrib-camera mbr-iconfont mbr-iconfont-btn"></span>Dia 3</a></li>
-          <li class="nav-item">
-            <a class="nav-link text-primary display-4" href="https://www.facebook.com/profile.php?id=61558164688622" target="_blank">
-              <img src="https://cdn.xperia.pt/Facebook_f_logo_(2019).svg" alt="Facebook" style="width: 30px; height: 30px;">
-            </a>
-          </li>
+<li class="nav-item">
+				  <a class="nav-link link text-primary display-4" href="index.html#features03-6">
+				    <span class="mbrib-home mbr-iconfont mbr-iconfont-btn"></span>
+				  </a>
+				</li>
         </ul>
       </div>
     </div>
@@ -449,8 +288,8 @@
 
     for (let i = 1; i <= imageCount; i++) {
       const file = `Festa-${i}.jpg`;
-      const cdnBase = 'https://cdn-dia2.xperia.pt';
-      const cdnHD = 'https://cdn-dia2-hd.xperia.pt';
+      const cdnBase = 'https://cdn-dia1.xperia.pt';
+      const cdnHD = 'https://cdn-dia1-hd.xperia.pt';
 
       const thumbUrl = `${cdnBase}/${file}`;
       const fullUrl = `${cdnBase}/${file}`; // used for viewing in Fancybox
@@ -536,6 +375,6 @@
   blocker.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
   blocker.addEventListener('scroll', e => e.preventDefault(), { passive: false });
 </script>
-  
+
 </body>
 </html>
