@@ -587,26 +587,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!video || !unmuteBtn) return;
 
-  // Hide button if already interacted
+  // Hide button if user already interacted
   if (localStorage.getItem(STORAGE_KEY) === 'true') {
     unmuteBtn.style.display = 'none';
     return;
   }
 
+  // Check if video is playing
+  function isVideoPlaying(vid) {
+    return !!(
+      vid.currentTime > 0 &&
+      !vid.paused &&
+      !vid.ended &&
+      vid.readyState >= 2
+    );
+  }
+
+  // Handle unmute and play logic
   unmuteBtn.addEventListener('click', function () {
+    // Unmute and set volume
     video.muted = false;
     video.volume = 1;
 
-    // Force play in case autoplay failed
-    video.play().catch(() => {
-      // fallback: show a toast or notice if needed
-      console.warn("Playback with sound blocked again");
-    });
+    // Play the video if it's not playing
+    if (!isVideoPlaying(video)) {
+      video.play().catch((err) => {
+        console.warn("Playback blocked again:", err);
+      });
+    }
 
-    // Hide button after interaction
-    unmuteBtn.style.display = 'none';
+    // Fade out the button
+    unmuteBtn.style.transition = 'opacity 0.3s ease';
+    unmuteBtn.style.opacity = '0';
+    setTimeout(() => {
+      unmuteBtn.style.display = 'none';
+    }, 300);
 
-    // Save to localStorage so it doesn't show again
+    // Remember user's interaction
     localStorage.setItem(STORAGE_KEY, 'true');
   });
 });
