@@ -201,7 +201,7 @@
       100% {
         transform: translateX(-100%);
 }
-    .carousel {
+.carousel {
   width: 90%;
   margin: auto;
 }
