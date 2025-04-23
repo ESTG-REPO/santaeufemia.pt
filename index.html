@@ -450,11 +450,10 @@
 </div>
 
 
-<!-- Fullscreen-style photo viewer with background and max image size -->
-<div class="custom-photo-viewer" 
-     style="margin: 0; padding: 0; background-image: url('https://santaeufemia.pt/assets/images/background1.jpg'); 
-            background-size: cover; background-position: center; width: 100%; height: 100vh; 
-            display: flex; justify-content: center; align-items: center;">
+<!-- Fullscreen-style photo viewer with Bootstrap container and image background -->
+<div class="container-fluid d-flex justify-content-center align-items-center" 
+     style="min-height: 100vh; background-image: url('https://santaeufemia.pt/assets/images/background1.jpg'); 
+            background-size: cover; background-position: center; margin: 0; padding: 0;">
   <a href="assets/images/cartaz.jpg" data-fancybox="gallery" data-caption="...">
     <img 
       id="zoomableImage" 
@@ -569,7 +568,7 @@
       photoViewer.style.alignItems = "center";
 
       // Optional: Log a message to confirm the background was set
-      console.log('Background image applied to the photo viewer.');
+      console.log('Vai mas é tocar na erva bro.');
     }
   });
 </script>
