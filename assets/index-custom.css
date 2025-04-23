@@ -201,4 +201,13 @@
       100% {
         transform: translateX(-100%);
 }
-    
+    .carousel {
+  width: 90%;
+  margin: auto;
+}
+.carousel img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
