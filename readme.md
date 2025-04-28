@@ -5,7 +5,7 @@
 
 ---
 
-## Powered By:
+## Powered By and others...:
 
 <table align="center">
   <tr>
