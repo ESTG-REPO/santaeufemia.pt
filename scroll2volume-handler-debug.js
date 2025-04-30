@@ -1,120 +1,191 @@
-// --- Create the unmute overlay button programmatically ---
-const overlayButton = document.createElement('div');
-overlayButton.id = 'unmute-overlay';
-overlayButton.style.display = 'none'; // Initially hidden
-overlayButton.style.position = 'fixed';
-overlayButton.style.top = '50%';
-overlayButton.style.left = '50%';
-overlayButton.style.transform = 'translate(-50%, -50%)';
-overlayButton.style.background = 'rgba(0, 0, 0, 0.75)';
-overlayButton.style.color = '#fff';
-overlayButton.style.padding = '1.5em 2em';
-overlayButton.style.borderRadius = '12px';
-overlayButton.style.fontSize = '1.4em';
-overlayButton.style.textAlign = 'center';
-overlayButton.style.zIndex = '9999';
-overlayButton.style.cursor = 'pointer';
-overlayButton.style.maxWidth = '90%';
-overlayButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.5)';
-overlayButton.style.transition = 'opacity 0.5s ease, transform 0.3s ease-in-out';
-overlayButton.style.opacity = '0';
+(() => {
+  const CONFIG = {
+    videoSectionId: 'video05-4',
+    videoId: 'main-video',
+    fallbackBtnId: 'unmute-fallback-btn',
+    overlayBtnId: 'overlay-button',
+    debug: false,
+    autoScrollDelay: 2000,
+    overlayFallbackDelay: 4000,
+    sessionKey: 'videoAutoScrollDone',
+    cookieKey: 'videoSeen',
+  };
 
-// Hover effects
-overlayButton.onmouseover = () => {
-  overlayButton.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
-  overlayButton.style.transform = 'translate(-50%, -50%) scale(1.05)';
-};
-overlayButton.onmouseout = () => {
-  overlayButton.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
-  overlayButton.style.transform = 'translate(-50%, -50%)';
-};
+  const log = (...args) => CONFIG.debug && console.log('[AutoVideo]', ...args);
 
-// Button text
-overlayButton.innerText = 'Clica para ativar SOM';
-document.body.appendChild(overlayButton);
+  let volumeActivated = false;
+  let autoScrollTimeout;
+  let overlayFallbackTimeout;
 
-let overlayShown = false;
-let overlayFadeTimeout;
+  const getById = id => document.getElementById(id);
 
-// Show overlay with fade-in and fade-out after 7s if not clicked
-const showOverlayButton = () => {
-  const video = document.getElementById('main-video');
-  if (video && video.muted && !overlayShown) {
-    overlayShown = true;
-    overlayButton.style.display = 'block';
-    setTimeout(() => { overlayButton.style.opacity = '1'; }, 10);
-
-    // Auto-fade-out after 7 seconds
-    overlayFadeTimeout = setTimeout(() => {
-      overlayButton.style.opacity = '0';
-      setTimeout(() => {
-        overlayButton.style.display = 'none';
-      }, 500);
-    }, 7000);
+  function isElementInViewport(el) {
+    if (!el || !el.getBoundingClientRect) return false;
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    );
   }
-};
 
-// Unmute on overlay click
-overlayButton.addEventListener('click', function () {
-  const video = document.getElementById('main-video');
-  if (video) {
-    video.muted = false;
-    overlayButton.style.opacity = '0';
-    setTimeout(() => {
-      overlayButton.style.display = 'none';
-    }, 500);
-    clearTimeout(overlayFadeTimeout);
-  }
-});
-
-// Show overlay on load if video is muted
-window.addEventListener('load', showOverlayButton);
-
-// Show overlay again if muted later
-const video = document.getElementById('main-video');
-if (video) {
-  video.addEventListener('play', showOverlayButton);
-  video.addEventListener('pause', showOverlayButton);
-  video.addEventListener('volumechange', showOverlayButton);
-  video.addEventListener('click', activateVolumeOnInput); // Volume on video click
-}
-
-// --- Auto-Scroll After 2 Seconds ---
-setTimeout(() => {
-  const videoSection = document.getElementById('video05-4');
-  if (videoSection) {
-    window.scrollTo({ top: videoSection.offsetTop, behavior: 'smooth' });
-  }
-}, 2000);
-
-// --- Detect Any User Input to Unmute Video ---
-let volumeActivated = false;
-function activateVolumeOnInput() {
-  if (!volumeActivated) {
-    const video = document.getElementById('main-video');
-    if (video) {
-      video.muted = false;
-      overlayButton.style.opacity = '0';
-      setTimeout(() => {
-        overlayButton.style.display = 'none';
-      }, 500);
-      clearTimeout(overlayFadeTimeout);
+  function scrollToElement(el) {
+    try {
+      if ('scrollIntoView' in el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+      }
+    } catch (e) {
+      window.scrollTo(0, el.offsetTop);
     }
-    volumeActivated = true;
-
-    // Hide fallback button too
-    const fallbackBtn = document.getElementById('unmute-fallback-btn');
-    if (fallbackBtn) fallbackBtn.style.display = 'none';
   }
-}
 
-// Trigger on any interaction
-['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
-  window.addEventListener(evt, activateVolumeOnInput, { once: true });
-});
+  function activateVolumeOnInput() {
+    if (volumeActivated) return;
 
-// --- Bootstrap Fallback Button Support ---
-const fallbackBtn = document.getElementById('unmute-fallback-btn');
-if (fallbackBtn) {
-  fallbackBtn.addEventListener('click', activateVolumeOnInput);
-}
+    const video = getById(CONFIG.videoId);
+    const overlay = getById(CONFIG.overlayBtnId);
+    const fallbackBtn = getById(CONFIG.fallbackBtnId);
+
+    if (video) {
+      try {
+        video.muted = false;
+        video.setAttribute('aria-live', 'polite');
+      } catch (err) {
+        log('Video mute toggle failed', err);
+      }
+    }
+
+    if (overlay) {
+      overlay.style.transition = 'opacity 0.5s ease';
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 500);
+    }
+
+    if (fallbackBtn) {
+      fallbackBtn.style.display = 'none';
+    }
+
+    volumeActivated = true;
+    sessionStorage.setItem(CONFIG.sessionKey, '1');
+    setCookie(CONFIG.cookieKey, '1', 24 * 60 * 60); // Cookie expiry 1 day
+    clearTimeout(autoScrollTimeout);
+    clearTimeout(overlayFallbackTimeout);
+    log('Volume activated and UI cleaned up');
+  }
+
+  function tryAutoScroll() {
+    const seen = sessionStorage.getItem(CONFIG.sessionKey);
+    if (seen === '1') return;
+
+    const section = getById(CONFIG.videoSectionId);
+    if (section && !isElementInViewport(section)) {
+      scrollToElement(section);
+      log('Auto-scrolled to video section');
+    }
+  }
+
+  function showOverlayFallback() {
+    const overlay = getById(CONFIG.overlayBtnId);
+    if (overlay && !volumeActivated) {
+      overlay.style.opacity = '1';
+      overlay.style.display = 'flex';
+      overlay.setAttribute('role', 'button');
+      overlay.setAttribute('tabindex', '0');
+      overlay.setAttribute('aria-label', 'Tap to unmute video');
+      log('Overlay fallback displayed');
+    }
+  }
+
+  function setupInteractionEvents() {
+    const events = ['click', 'touchstart', 'scroll', 'keydown'];
+    events.forEach(eventType => {
+      try {
+        window.addEventListener(eventType, activateVolumeOnInput, {
+          once: true,
+          passive: true,
+        });
+      } catch (err) {
+        window.attachEvent?.('on' + eventType, activateVolumeOnInput); // IE fallback
+      }
+    });
+  }
+
+  function setupManualFallbacks() {
+    const fallbackBtn = getById(CONFIG.fallbackBtnId);
+    if (fallbackBtn) {
+      fallbackBtn.addEventListener('click', activateVolumeOnInput);
+    }
+
+    const overlay = getById(CONFIG.overlayBtnId);
+    if (overlay) {
+      overlay.addEventListener('click', activateVolumeOnInput);
+      overlay.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          activateVolumeOnInput();
+        }
+      });
+    }
+  }
+
+  // --- Mobile-First Hints ---
+  if (navigator.connection?.saveData || navigator.connection?.effectiveType === '2g') {
+    log('User has a slow or metered connection – skipping preload');
+    // Optionally, delay heavy resources (like video)
+    // Or avoid autoplay entirely for slow networks
+  }
+
+  // --- Cookie-Based Remembering (Persistent Across Sessions) ---
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+  }
+
+  function autoplayVideoOnScroll() {
+    const video = getById(CONFIG.videoId);
+    if (video && isElementInViewport(video)) {
+      if (!video.paused && !video.muted) return;
+      video.play?.().catch(err => log('Auto-play failed:', err));
+      window.removeEventListener('scroll', autoplayVideoOnScroll);
+      log('Video auto-played on scroll into view');
+    }
+  }
+
+  // --- MutationObserver to Support Dynamic DOM Updates ---
+  const observer = new MutationObserver(() => {
+    setupManualFallbacks(); // Re-bind buttons if new elements are added dynamically
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  function onReady(callback) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback);
+    } else {
+      callback();
+    }
+  }
+
+  onReady(() => {
+    log('Initializing full-featured video handler');
+
+    setupInteractionEvents();
+    setupManualFallbacks();
+
+    autoScrollTimeout = setTimeout(tryAutoScroll, CONFIG.autoScrollDelay);
+    overlayFallbackTimeout = setTimeout(showOverlayFallback, CONFIG.overlayFallbackDelay);
+
+    window.addEventListener('scroll', autoplayVideoOnScroll, { passive: true });
+
+    // Lazy-load video on scroll (if needed)
+    window.addEventListener('scroll', lazyLoadVideo, { passive: true });
+  });
+})();
