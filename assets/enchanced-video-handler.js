@@ -1,79 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
   const video = document.getElementById('main-video');
-  const button = document.getElementById('unmute-fallback-btn');
-  const icon = button.querySelector('i');
-  const tooltip = new bootstrap.Tooltip(button);
+  const muteBtn = document.getElementById('mute-toggle-btn');
   const volumeSlider = document.getElementById('volume-slider');
+  const icon = muteBtn.querySelector('i');
   const AUTOHIDE = 10000;
 
-  // Set initial volume from localStorage (if available)
+  // Restore volume from localStorage
   video.volume = parseFloat(localStorage.getItem('videoVolume')) || 1;
+  video.muted = localStorage.getItem('videoUnmuted') !== 'true';
+  volumeSlider.value = video.volume;
 
-  // Fade-in effect for unmute button
-  function fadeIn() {
-    button.style.display = 'inline-block';
-    setTimeout(() => button.classList.add('show'), 10);
-  }
-
-  // Fade-out effect for unmute button
-  function fadeOut() {
-    button.classList.remove('show');
-    setTimeout(() => button.style.display = 'none', 500);
-  }
-
-  // Update icon based on video state (paused, muted, or playing)
+  // Update icon based on state
   function updateIcon() {
     if (video.paused) {
-      icon.className = 'fas fa-play me-2';
-    } else if (video.muted) {
-      icon.className = 'fas fa-volume-mute me-2';
+      icon.className = 'fas fa-play';
+    } else if (video.muted || video.volume === 0) {
+      icon.className = 'fas fa-volume-mute';
+    } else if (video.volume <= 0.5) {
+      icon.className = 'fas fa-volume-down';
     } else {
-      icon.className = 'fas fa-volume-up me-2';
+      icon.className = 'fas fa-volume-up';
     }
   }
 
-  // Try autoplaying the video while handling muted/unmuted state
+  // Autoplay with fallback
   function tryAutoplay() {
-    if (localStorage.getItem('videoUnmuted') === 'true') {
-      video.muted = false;
-      video.play().catch((err) => console.warn('Autoplay failed:', err));
-      return;
-    }
-
-    video.muted = true;
     video.play().then(() => {
-      if (video.muted) {
-        fadeIn();
-        setTimeout(fadeOut, AUTOHIDE);
-      }
-    }).catch((err) => {
-      console.warn('Autoplay failed:', err);
-      fadeIn();
-      setTimeout(fadeOut, AUTOHIDE);
+      if (video.muted) showControlsTemporarily();
+    }).catch(() => {
+      showControlsTemporarily();
     });
   }
 
-  // Click event to unmute and play video
-  button.addEventListener('click', () => {
-    video.muted = false;
-    localStorage.setItem('videoUnmuted', 'true');
-    video.play().catch((err) => console.warn('Play error:', err));
-    updateIcon();
-    fadeOut();
-    tooltip.hide();
+  // Show/hide controls
+  function showControlsTemporarily() {
+    muteBtn.parentElement.style.display = 'flex';
+    setTimeout(() => {
+      muteBtn.parentElement.style.display = 'none';
+    }, AUTOHIDE);
+  }
+
+  // Toggle mute
+  muteBtn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    localStorage.setItem('videoUnmuted', (!video.muted).toString());
     if (navigator.vibrate) navigator.vibrate(50);
+    updateIcon();
   });
 
-  // Keyboard controls: Spacebar for play/pause, 'M' for mute/unmute
+  // Slider control
+  volumeSlider.addEventListener('input', (e) => {
+    const vol = parseFloat(e.target.value);
+    video.volume = vol;
+    video.muted = vol === 0;
+    localStorage.setItem('videoVolume', vol);
+    updateIcon();
+  });
+
+  // Keyboard support
   document.addEventListener('keydown', (e) => {
-    if (e.key === ' ' && document.activeElement !== button) {
+    if (e.key === ' ' && document.activeElement !== volumeSlider) {
       e.preventDefault();
-      if (video.paused) {
-        video.play().catch((err) => console.warn('Play error:', err));
-      } else {
-        video.pause();
-      }
-      updateIcon();
+      video.paused ? video.play() : video.pause();
     }
     if (e.key.toLowerCase() === 'm') {
       video.muted = !video.muted;
@@ -81,21 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Add keyboard navigation to the button for accessibility (enter/space to click)
-  button.setAttribute('tabindex', '0');
-  button.addEventListener('keydown', (e) => {
-    if (['Enter', ' '].includes(e.key)) {
-      e.preventDefault();
-      button.click();
-    }
-  });
-
-  // Update icon when video volume changes
-  video.addEventListener('volumechange', updateIcon);
-  video.addEventListener('play', updateIcon);
-  video.addEventListener('pause', updateIcon);
-
-  // Double-click to toggle fullscreen mode
+  // Double-click fullscreen
   video.addEventListener('dblclick', () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -104,28 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Click outside the video or button to hide the unmute button
-  document.addEventListener('click', (e) => {
-    if (!button.contains(e.target) && !video.contains(e.target)) {
-      fadeOut();
-    }
-  });
+  // Icon updates on change
+  video.addEventListener('volumechange', updateIcon);
+  video.addEventListener('play', updateIcon);
+  video.addEventListener('pause', updateIcon);
 
-  // Show volume slider on button hover
-  button.addEventListener('mouseenter', () => {
-    volumeSlider.style.display = 'inline-block';
-  });
-
-  button.addEventListener('mouseleave', () => {
-    volumeSlider.style.display = 'none';
-  });
-
-  // Handle volume change from the slider
-  volumeSlider.addEventListener('input', (e) => {
-    video.volume = e.target.value / 100;
-    localStorage.setItem('videoVolume', video.volume); // Save volume to localStorage
-  });
-
-  // Ensure video plays after the page loads with proper fallback behavior
+  updateIcon();
   tryAutoplay();
 });
