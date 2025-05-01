@@ -48,7 +48,7 @@
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Golos+Text:400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Golos+Text:400,500,600,700,800,900&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=1Hd3jQ" type="text/css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link href="https://cdn.tailwindcss.com" rel="stylesheet" />
  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> 
@@ -172,10 +172,10 @@
   </div>
 </section>
 
-<!-- Volume Controls -->
+<!-- Real Volume Controls -->
 <div id="volume-controls" style="
   position: absolute;
-  top: 10%;
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.75);
@@ -184,27 +184,32 @@
   padding: 10px 20px;
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 10;
+  z-index: 999;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: nowrap;
 ">
+
   <!-- Mute/Unmute Button -->
   <button id="mute-toggle-btn" class="btn btn-light btn-sm" style="
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 10px;
-    font-size: 1.1rem;
-    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
   ">
     <i class="fas fa-volume-mute"></i>
   </button>
 
   <!-- Volume Slider -->
   <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0" style="
-    width: 150px;
+    width: 160px;
+    height: 8px;
     accent-color: #0d6efd;
+    cursor: pointer;
   " />
 </div>
 
