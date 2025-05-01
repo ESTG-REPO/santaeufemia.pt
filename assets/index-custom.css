@@ -201,3 +201,27 @@
       100% {
         transform: translateX(-100%);
 }
+/* Custom video controls styling */
+.video-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.video-controls button,
+.video-controls input {
+  margin-right: 10px;
+  padding: 5px;
+  background-color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.video-controls button:hover {
+  background-color: #f0f0f0;
+}
