@@ -172,33 +172,41 @@
   </div>
 </section>
 
-<!-- Unmute Button for controlling video -->
-<button id="unmute-fallback-btn"
-        class="btn btn-primary btn-lg fade unmute-btn"
-        type="button"
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        aria-label="Ativar som do vídeo"
-        title="Clique para ativar o som do vídeo"
-        style="
-          display: none;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: rgba(0, 0, 0, 0.75);
-          border: 2px solid #ffffff;
-          border-radius: 12px;
-          padding: 15px 30px;
-          font-size: 1.2rem;
-          color: #ffffff;
-          transition: opacity 0.5s ease, transform 0.3s ease;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          z-index: 10;
-        ">
-  <i class="fas fa-volume-mute me-2"></i>
-  Ativar Vídeo
-</button>
+<!-- Volume Controls -->
+<div id="volume-controls" style="
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid #fff;
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+">
+  <!-- Mute/Unmute Button -->
+  <button id="mute-toggle-btn" class="btn btn-light btn-sm" style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  ">
+    <i class="fas fa-volume-mute"></i>
+  </button>
+
+  <!-- Volume Slider -->
+  <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0" style="
+    width: 150px;
+    accent-color: #0d6efd;
+  " />
+</div>
 
 
   </section>
