@@ -54,7 +54,8 @@
  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> 
   <script src="/scroll-handler.js"></script>
   <script src="/input-detection-handler.js"></script>
-  <script src="assets/random-img-gen.js"></script> -->
+  -->
+ <script src="assetsenchanced-video-handler.js"></script>
 
 </head>
 
@@ -171,26 +172,33 @@
   </div>
 </section>
 
-
- <!-- Bootstrap Unmute Button -->
-<div class="text-center mt-3">
-    <button id="unmute-fallback-btn" 
-            class="btn btn-primary btn-lg" 
-            type="button"
-            onclick="document.getElementById('main-video').muted = false; this.style.display = 'none';"
-            style="
-              background: rgba(0, 0, 0, 0.75);
-              border: 2px solid #fff;
-              border-radius: 12px;
-              padding: 15px 30px;
-              font-size: 1.2rem;
-              transition: all 0.3s ease;
-              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            ">
-      <i class="fas fa-volume-up me-2"></i>
-      Ativar Video
-    </button>
-  </div>
+<!-- Unmute Button for controlling video -->
+<button id="unmute-fallback-btn"
+        class="btn btn-primary btn-lg fade unmute-btn"
+        type="button"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        aria-label="Ativar som do vídeo"
+        title="Clique para ativar o som do vídeo"
+        style="
+          display: none;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(0, 0, 0, 0.75);
+          border: 2px solid #ffffff;
+          border-radius: 12px;
+          padding: 15px 30px;
+          font-size: 1.2rem;
+          color: #ffffff;
+          transition: opacity 0.5s ease, transform 0.3s ease;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          z-index: 10;
+        ">
+  <i class="fas fa-volume-mute me-2"></i>
+  Ativar Vídeo
+</button>
 
 
   </section>
