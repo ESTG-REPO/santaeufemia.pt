@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const bgVideo = document.getElementById("bg-video");
   const mainVideo = document.getElementById("main-video");
 
-  // Force autoplay, loop, playsinline, muted on both videos
+  // Ensure both videos autoplay, loop, and are muted initially
   [bgVideo, mainVideo].forEach(video => {
     video.setAttribute("autoplay", true);
     video.setAttribute("loop", true);
@@ -11,12 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
     video.play().catch(err => console.warn("Autoplay error:", err));
   });
 
-  // Create fixed toggle button
+  // Create toggle button
   const btn = document.createElement("button");
   btn.innerHTML = "<span style='margin-right: 8px;'>&#128266;</span>com som";
   btn.style.position = "fixed";
   btn.style.top = "20px";
-  btn.style.right = "20px";
+  btn.style.left = "50%";
+  btn.style.transform = "translateX(-50%)";
   btn.style.padding = "10px 20px";
   btn.style.backgroundColor = "rgba(0,0,0,0.6)";
   btn.style.color = "#fff";
@@ -44,17 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
       mainVideo.muted = false;
       mainVideo.volume = 1.0;
       mainVideo.play().catch(() => {});
-      btn.innerHTML="<span style='display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%'><span>&#128263;</span><span>sem som</span></span>";
-
-
+      btn.innerHTML = "<span style='margin-right: 8px;'>&#128263;</span>sem som";
       fadeInButton();
       clearTimeout(fadeTimeout);
       fadeTimeout = setTimeout(() => {
         fadeOutButton();
-      }, 5000); // fade out after 5 seconds
+      }, 5000);
     } else {
       mainVideo.muted = true;
-      btn.innerHTML="<span style='display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%'><span>&#128263;</span><span>sem som</span></span>";
+      btn.innerHTML = "<span style='margin-right: 8px;'>&#128266;</span>com som";
       fadeInButton();
       clearTimeout(fadeTimeout);
     }
@@ -68,13 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
       mainVideo.volume = 1.0;
       mainVideo.play().catch(() => {});
       btn.innerHTML = "<span style='margin-right: 8px;'>&#128263;</span>sem som";
-
       fadeInButton();
       clearTimeout(fadeTimeout);
       fadeTimeout = setTimeout(() => {
         fadeOutButton();
       }, 5000);
-
       userHasInteracted = true;
     } else {
       if (mainVideo.paused || mainVideo.readyState < 3) {
@@ -82,5 +79,27 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }, { once: true });
-});
 
+  // Sync logic: mainVideo is the master
+  function syncVideos() {
+    const diff = Math.abs(bgVideo.currentTime - mainVideo.currentTime);
+    if (diff > 0.3) {
+      bgVideo.currentTime = mainVideo.currentTime;
+    }
+  }
+
+  // Interval fallback sync
+  const syncInterval = setInterval(syncVideos, 300);
+
+  // Event-based sync fallback
+  mainVideo.addEventListener("seeking", () => {
+    bgVideo.currentTime = mainVideo.currentTime;
+  });
+
+  mainVideo.addEventListener("timeupdate", () => {
+    const diff = Math.abs(bgVideo.currentTime - mainVideo.currentTime);
+    if (diff > 0.3) {
+      bgVideo.currentTime = mainVideo.currentTime;
+    }
+  });
+});
