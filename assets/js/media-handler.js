@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
       mainVideo.muted = false;
       mainVideo.volume = 1.0;
       mainVideo.play().catch(() => {});
-      btn.innerHTML = "<span style='margin-right: 8px;'>&#128263;</span>sem som";
+      btn.innerHTML="<span style='display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%'><span>&#128263;</span><span>sem som</span></span>";
+
 
       fadeInButton();
       clearTimeout(fadeTimeout);
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 5000); // fade out after 5 seconds
     } else {
       mainVideo.muted = true;
-      btn.innerHTML = "<span style='margin-right: 8px;'>&#128266;</span>com som";
+      btn.innerHTML="<span style='display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%'><span>&#128263;</span><span>sem som</span></span>";
       fadeInButton();
       clearTimeout(fadeTimeout);
     }
