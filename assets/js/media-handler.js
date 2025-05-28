@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", function () {
   const bgVideo = document.getElementById("bg-video");
   const mainVideo = document.getElementById("main-video");
@@ -83,4 +82,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }, { once: true });
 });
-</script>
+
