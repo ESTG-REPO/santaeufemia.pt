@@ -142,35 +142,30 @@
     </nav>
   </section>
 
-<!-- Fullscreen-style photo viewer with background and max image size -->
+<!-- Merged fullscreen-style photo viewer with shared background -->
 <div class="custom-photo-viewer" 
      style="margin: 0; padding: 0; background-image: url('https://santaeufemia.pt/assets/images/background1.jpg'); 
             background-size: cover; background-position: center; width: 100%; height: 100vh; 
-            display: flex; justify-content: center; align-items: center;">
+            display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+  
   <a href="/assets/images/favicon.png" data-fancybox="gallery" data-caption="...">
     <img 
-      id="zoomableImage" 
       src="/assets/images/favicon.png" 
+      alt="favicon" 
+      style="max-width: 90vw; max-height: 90vh; height: auto; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" 
+    />
+  </a>
+
+  <a href="/assets/images/cartaz.jpg" data-fancybox="gallery" data-caption="...">
+    <img 
+      src="/assets/images/cartaz.jpg" 
       alt="cartaz das festas" 
       style="max-width: 90vw; max-height: 90vh; height: auto; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" 
     />
   </a>
+  
 </div>
 
-<!-- Fullscreen-style photo viewer with background and max image size -->
-<div class="custom-photo-viewer" 
-     style="margin: 0; padding: 0; background-image: url('https://santaeufemia.pt/assets/images/background1.jpg'); 
-            background-size: cover; background-position: center; width: 100%; height: 100vh; 
-            display: flex; justify-content: center; align-items: center;">
-  <a href="assets/images/cartaz.jpg" data-fancybox="gallery" data-caption="...">
-    <img 
-      id="zoomableImage" 
-      src="assets/images/cartaz.jpg" 
-      alt="cartaz das festas" 
-      style="max-width: 90vw; max-height: 90vh; height: auto; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" 
-    />
-  </a>
-</div>
 
 
 <div class="share-bar">
@@ -639,17 +634,25 @@
 
   
 <script>
-  $(document).ready(function(){
-    $('.photo-carousel').slick({
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
+  // Initialize Fancybox with autoplay and fade effect
+  Fancybox.bind("[data-fancybox='gallery']", {
+    animated: true,
+    showClass: "fancybox-zoomIn",
+    hideClass: "fancybox-zoomOut",
+    dragToClose: false,
+    Images: {
+      Panzoom: {
+        maxScale: 3,
+      }
+    },
+    Carousel: {
+      transition: "fade",
       autoplay: true,
-      autoplaySpeed: 3000,
-      dots: true,
-      arrows: true,
-      adaptiveHeight: true
-    });
+      interval: 3000,
+    },
+    Toolbar: {
+      display: ["zoom", "close", "slideshow", "fullscreen", "download"]
+    }
   });
 </script>
   
@@ -669,56 +672,6 @@
     min_height: 100               // optional: minimum editor height
   });
 </script>
- <!--
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const video = document.getElementById('main-video') || document.getElementById('video05-4');
-  const unmuteBtn = document.getElementById('unmute-fallback-btn');
-  const STORAGE_KEY = 'hasInteractedWithVideo';
 
-  if (!video || !unmuteBtn) return;
-
-  // Hide button if user already interacted
-  if (localStorage.getItem(STORAGE_KEY) === 'true') {
-    unmuteBtn.style.display = 'none';
-    return;
-  }
-
-  // Check if video is playing
-  function isVideoPlaying(vid) {
-    return !!(
-      vid.currentTime > 0 &&
-      !vid.paused &&
-      !vid.ended &&
-      vid.readyState >= 2
-    );
-  }
-
-  // Handle unmute and play logic
-  unmuteBtn.addEventListener('click', function () {
-    // Unmute and set volume
-    video.muted = false;
-    video.volume = 1;
-
-    // Play the video if it's not playing
-    if (!isVideoPlaying(video)) {
-      video.play().catch((err) => {
-        console.warn("Playback blocked again:", err);
-      });
-    }
-
-    // Fade out the button
-    unmuteBtn.style.transition = 'opacity 0.3s ease';
-    unmuteBtn.style.opacity = '0';
-    setTimeout(() => {
-      unmuteBtn.style.display = 'none';
-    }, 300);
-
-    // Remember user's interaction
-    localStorage.setItem(STORAGE_KEY, 'true');
-  });
-});
-</script>
--->
 </body>
 </html>
