@@ -143,12 +143,13 @@
     </nav>
   </section>
 
-<!-- Fullscreen-style photo viewer with shared background -->
+<!-- Single visible image with hidden group in background -->
 <div class="custom-photo-viewer" 
      style="margin: 0; padding: 0; background-image: url('https://santaeufemia.pt/assets/images/background1.jpg'); 
             background-size: cover; background-position: center; width: 100%; height: 100vh; 
-            display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+            display: flex; justify-content: center; align-items: center;">
 
+  <!-- Visible image -->
   <a href="/assets/images/favicon.png" data-fancybox="gallery" data-caption="Favicon Image">
     <img 
       src="/assets/images/favicon.png" 
@@ -157,33 +158,12 @@
     />
   </a>
 
-  <a href="/assets/images/cartaz.jpg" data-fancybox="gallery" data-caption="Cartaz das Festas">
-    <img 
-      src="/assets/images/cartaz.jpg" 
-      alt="cartaz das festas" 
-      style="max-width: 90vw; max-height: 90vh; height: auto; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" 
-    />
-  </a>
-
-  <a href="/assets/images/park.jpg" data-fancybox="gallery" data-caption="Parque">
-    <img 
-      src="/assets/images/park.jpg" 
-      alt="Parque" 
-      style="max-width: 90vw; max-height: 90vh; height: auto; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" 
-    />
-  </a>
-
-  <a href="https://cdn.xperia.pt/party.png" data-fancybox="gallery" data-caption="Party">
-    <img 
-      src="https://cdn.xperia.pt/party.png" 
-      alt="Party" 
-      style="max-width: 90vw; max-height: 90vh; height: auto; width: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" 
-    />
-  </a>
+  <!-- Hidden images in gallery -->
+  <a href="/assets/images/cartaz.jpg" data-fancybox="gallery" data-caption="Cartaz das Festas" style="display: none;"></a>
+  <a href="/assets/images/park.jpg" data-fancybox="gallery" data-caption="Parque" style="display: none;"></a>
+  <a href="https://cdn.xperia.pt/party.png" data-fancybox="gallery" data-caption="Party" style="display: none;"></a>
 
 </div>
-
-
 
 <div class="share-bar">
   <a href="https://wa.me/?text=https://santaeufemia.pt" target="_blank" class="share-icon whatsapp">
@@ -651,7 +631,6 @@
 
   
 <script>
-  // Initialize Fancybox with autoplay and fade effect
   Fancybox.bind("[data-fancybox='gallery']", {
     animated: true,
     showClass: "fancybox-zoomIn",
@@ -659,13 +638,13 @@
     dragToClose: false,
     Images: {
       Panzoom: {
-        maxScale: 3,
+        maxScale: 3
       }
     },
     Carousel: {
       transition: "fade",
       autoplay: true,
-      interval: 3000,
+      interval: 3000
     },
     Toolbar: {
       display: ["zoom", "close", "slideshow", "fullscreen", "download"]
