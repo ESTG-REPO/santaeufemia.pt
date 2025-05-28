@@ -29,15 +29,6 @@ Disallow: /
 User-agent: YouBot
 Disallow: /
 
-User-agent: facebookexternalhit
-Disallow: /
-
-User-agent: ia_archiver
-Disallow: /
-
-User-agent: archive.org_bot
-Disallow: /
-
 User-agent: dataforseo
 Disallow: /
 
